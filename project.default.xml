@@ -1,0 +1,212 @@
+<application>
+  <component name="ProjectManager">
+    <defaultProject>
+      <component name="DefaultGradleProjectSettings">
+        <option name="testRunner" value="GRADLE" />
+        <option name="delegatedBuild" value="true" />
+      </component>
+      <component name="ProjectCodeStyleConfiguration">
+        <code_scheme name="Project" version="173">
+          <codeStyleSettings language="XML">
+            <indentOptions>
+              <option name="CONTINUATION_INDENT_SIZE" value="4" />
+            </indentOptions>
+            <arrangement>
+              <rules>
+                <section>
+                  <rule>
+                    <match>
+                      <AND>
+                        <NAME>xmlns:android</NAME>
+                        <XML_ATTRIBUTE />
+                        <XML_NAMESPACE>^$</XML_NAMESPACE>
+                      </AND>
+                    </match>
+                  </rule>
+                </section>
+                <section>
+                  <rule>
+                    <match>
+                      <AND>
+                        <NAME>xmlns:.*</NAME>
+                        <XML_ATTRIBUTE />
+                        <XML_NAMESPACE>^$</XML_NAMESPACE>
+                      </AND>
+                    </match>
+                    <order>BY_NAME</order>
+                  </rule>
+                </section>
+                <section>
+                  <rule>
+                    <match>
+                      <AND>
+                        <NAME>.*:id</NAME>
+                        <XML_ATTRIBUTE />
+                        <XML_NAMESPACE>http://schemas.android.com/apk/res/android</XML_NAMESPACE>
+                      </AND>
+                    </match>
+                  </rule>
+                </section>
+                <section>
+                  <rule>
+                    <match>
+                      <AND>
+                        <NAME>.*:name</NAME>
+                        <XML_ATTRIBUTE />
+                        <XML_NAMESPACE>http://schemas.android.com/apk/res/android</XML_NAMESPACE>
+                      </AND>
+                    </match>
+                  </rule>
+                </section>
+                <section>
+                  <rule>
+                    <match>
+                      <AND>
+                        <NAME>name</NAME>
+                        <XML_ATTRIBUTE />
+                        <XML_NAMESPACE>^$</XML_NAMESPACE>
+                      </AND>
+                    </match>
+                  </rule>
+                </section>
+                <section>
+                  <rule>
+                    <match>
+                      <AND>
+                        <NAME>style</NAME>
+                        <XML_ATTRIBUTE />
+                        <XML_NAMESPACE>^$</XML_NAMESPACE>
+                      </AND>
+                    </match>
+                  </rule>
+                </section>
+                <section>
+                  <rule>
+                    <match>
+                      <AND>
+                        <NAME>.*</NAME>
+                        <XML_ATTRIBUTE />
+                        <XML_NAMESPACE>^$</XML_NAMESPACE>
+                      </AND>
+                    </match>
+                    <order>BY_NAME</order>
+                  </rule>
+                </section>
+                <section>
+                  <rule>
+                    <match>
+                      <AND>
+                        <NAME>.*</NAME>
+                        <XML_ATTRIBUTE />
+                        <XML_NAMESPACE>http://schemas.android.com/apk/res/android</XML_NAMESPACE>
+                      </AND>
+                    </match>
+                    <order>ANDROID_ATTRIBUTE_ORDER</order>
+                  </rule>
+                </section>
+                <section>
+                  <rule>
+                    <match>
+                      <AND>
+                        <NAME>.*</NAME>
+                        <XML_ATTRIBUTE />
+                        <XML_NAMESPACE>.*</XML_NAMESPACE>
+                      </AND>
+                    </match>
+                    <order>BY_NAME</order>
+                  </rule>
+                </section>
+              </rules>
+            </arrangement>
+          </codeStyleSettings>
+        </code_scheme>
+      </component>
+      <component name="ProjectInspectionProfilesVisibleTreeState">
+        <entry key="Project Default">
+          <profile-state>
+            <expanded-state>
+              <State />
+              <State>
+                <id>Android</id>
+              </State>
+              <State>
+                <id>CorrectnessLintAndroid</id>
+              </State>
+              <State>
+                <id>Inheritance issuesJava</id>
+              </State>
+              <State>
+                <id>InternationalizationLintAndroid</id>
+              </State>
+              <State>
+                <id>Java</id>
+              </State>
+              <State>
+                <id>Java 5Java language level migration aidsJava</id>
+              </State>
+              <State>
+                <id>Java language level migration aidsJava</id>
+              </State>
+              <State>
+                <id>Kotlin</id>
+              </State>
+              <State>
+                <id>LintAndroid</id>
+              </State>
+              <State>
+                <id>LintLintAndroid</id>
+              </State>
+              <State>
+                <id>MemoryJava</id>
+              </State>
+              <State>
+                <id>Method metricsJava</id>
+              </State>
+              <State>
+                <id>PerformanceJava</id>
+              </State>
+              <State>
+                <id>PerformanceLintAndroid</id>
+              </State>
+              <State>
+                <id>PortabilityJava</id>
+              </State>
+              <State>
+                <id>Probable bugsJava</id>
+              </State>
+              <State>
+                <id>SecurityLintAndroid</id>
+              </State>
+              <State>
+                <id>UsabilityLintAndroid</id>
+              </State>
+              <State>
+                <id>Verbose or redundant code constructsJava</id>
+              </State>
+            </expanded-state>
+          </profile-state>
+        </entry>
+      </component>
+      <component name="PropertiesComponent">
+        <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
+        <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+      </component>
+      <component name="masterDetails">
+        <states>
+          <state key="ProjectJDKs.UI">
+            <settings>
+              <last-edited>Android API 26 Platform</last-edited>
+              <splitter-proportions>
+                <option name="proportions">
+                  <list>
+                    <option value="0.2" />
+                  </list>
+                </option>
+              </splitter-proportions>
+            </settings>
+          </state>
+        </states>
+      </component>
+    </defaultProject>
+  </component>
+</application>
