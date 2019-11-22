@@ -1,6 +1,7 @@
 package org.tensorflow.lite.examples.classification.fragments;
 
 import android.app.Application;
+import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.Sensor;
@@ -28,6 +29,7 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
 
     private MutableLiveData<String> mBattery;
     private MutableLiveData<String> mWifi;
+    private MutableLiveData<String> mBluetooth;
     private MutableLiveData<SensorDataObject> dataObjectMutableLiveData;
     private MutableLiveData<Boolean> isMission;
 
@@ -47,6 +49,7 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
         super(context);
         mBattery = new MutableLiveData<>();
         mWifi = new MutableLiveData<>();
+        mBluetooth = new MutableLiveData<>();
         dataObjectMutableLiveData = new MutableLiveData<>();
         isMission = new MutableLiveData<>();
 
@@ -67,6 +70,16 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
         } else {
             mWifi.setValue("Wifi: Not Connected");
         }
+
+
+        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (bluetoothAdapter == null)
+            mBluetooth.setValue("Device does not support Bluetooth");
+        else if (bluetoothAdapter.isEnabled())
+            mBluetooth.setValue("Bluetooth enabled");
+        else
+            mBluetooth.setValue("Bluetooth disabled");
+
     }
 
     public LiveData<String> getBattery() {
@@ -75,6 +88,10 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
 
     public LiveData<String> getWifi() {
         return mWifi;
+    }
+
+    public LiveData<String> getBluetooth() {
+        return mBluetooth;
     }
 
     public LiveData<SensorDataObject> getSensorDO() {
@@ -97,15 +114,15 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
         sensorDO = new SensorDataObject();
 
         boolean isavailable = manager.registerListener(this, accSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        Log.i(HomeViewModel.class.getSimpleName(), "Accelerometer "+isavailable);
+        Log.i(HomeViewModel.class.getSimpleName(), "Accelerometer " + isavailable);
         isavailable = manager.registerListener(this, lightSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        Log.i(HomeViewModel.class.getSimpleName(), "Light Sensor "+isavailable);
+        Log.i(HomeViewModel.class.getSimpleName(), "Light Sensor " + isavailable);
         isavailable = manager.registerListener(this, pressureSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        Log.i(HomeViewModel.class.getSimpleName(), "Pressure "+isavailable);
+        Log.i(HomeViewModel.class.getSimpleName(), "Pressure " + isavailable);
         isavailable = manager.registerListener(this, relativeHumiditySensor, SensorManager.SENSOR_DELAY_NORMAL);
-        Log.i(HomeViewModel.class.getSimpleName(), "Relative Humidity "+isavailable);
+        Log.i(HomeViewModel.class.getSimpleName(), "Relative Humidity " + isavailable);
         isavailable = manager.registerListener(this, ambientTempSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        Log.i(HomeViewModel.class.getSimpleName(), "Ambient Temperature "+isavailable);
+        Log.i(HomeViewModel.class.getSimpleName(), "Ambient Temperature " + isavailable);
     }
 
     @Override
@@ -180,9 +197,9 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
     }
 
     public void onDetached() {
-        if(missionTimer!=null){
+        if (missionTimer != null) {
             missionTimer.cancel();
-            missionTimer=null;
+            missionTimer = null;
         }
     }
 

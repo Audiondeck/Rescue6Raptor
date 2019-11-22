@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\Dennis\\Desktop\\og\\TensorFlowRover6\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-mr\\values-mr.xml",
+            "outputFile": "C:\\Users\\delfr\\Desktop\\Rescue6Raptor\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-mr\\values-mr.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Dennis\\.gradle\\caches\\transforms-2\\files-2.1\\ec609e8cee787e2dff3592c66b08a66a\\core-1.0.0\\res\\values-mr\\values-mr.xml",
+                    "source": "C:\\Users\\delfr\\.gradle\\caches\\transforms-2\\files-2.1\\ec609e8cee787e2dff3592c66b08a66a\\core-1.0.0\\res\\values-mr\\values-mr.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Dennis\\.gradle\\caches\\transforms-2\\files-2.1\\61fd76c3f848cf55f45e843ab08cdd70\\appcompat-1.0.0\\res\\values-mr\\values-mr.xml",
+                    "source": "C:\\Users\\delfr\\.gradle\\caches\\transforms-2\\files-2.1\\61fd76c3f848cf55f45e843ab08cdd70\\appcompat-1.0.0\\res\\values-mr\\values-mr.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",

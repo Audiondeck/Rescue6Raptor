@@ -23,6 +23,7 @@ public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
 
+    TextView bluetooth;
     TextView accTV;
     TextView lightTV;
     TextView pressureTV;
@@ -37,6 +38,8 @@ public class HomeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         final TextView battery = root.findViewById(R.id.battery);
         final TextView wifi = root.findViewById(R.id.wifi);
+        bluetooth = root.findViewById(R.id.bluetooth);
+
         accTV = root.findViewById(R.id.acc_values);
         lightTV = root.findViewById(R.id.light);
         pressureTV = root.findViewById(R.id.pressure);
@@ -54,6 +57,13 @@ public class HomeFragment extends Fragment {
             @Override
             public void onChanged(@Nullable String s) {
                 wifi.setText(s);
+            }
+        });
+
+        homeViewModel.getBluetooth().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                bluetooth.setText(s);
             }
         });
 

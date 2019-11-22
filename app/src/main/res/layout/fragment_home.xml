@@ -34,6 +34,18 @@
         app:layout_constraintTop_toBottomOf="@+id/battery" />
 
     <TextView
+        android:id="@+id/bluetooth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="36dp"
+        android:text="Bluetooth Status"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wifi" />
+
+    <TextView
         android:id="@+id/accelerometer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -43,7 +55,7 @@
         android:layout_marginTop="36dp"
         android:text="Accelerometer"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wifi" />
+        app:layout_constraintTop_toBottomOf="@+id/bluetooth" />
 
     <TextView
         android:id="@+id/acc_values"

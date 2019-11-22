@@ -1221,6 +1221,7 @@ id barrier
 id battery
 id beginning
 id blocking
+id bluetooth
 id bottom
 id bottom_sheet_arrow
 id bottom_sheet_layout
