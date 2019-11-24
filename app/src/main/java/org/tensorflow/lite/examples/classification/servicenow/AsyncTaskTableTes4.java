@@ -19,8 +19,8 @@ import java.net.URL;
 public class AsyncTaskTableTes4 extends AsyncTask<Void, Void, String> {
 
     private final String USER_AGENT = "Mozilla/5.0";
-    private final String user = "rip4@psu.edu";
-    private final String pwd = "TensorTc$mry2017";
+    private final String user = "dqt5211@psu.edu";
+    private final String pwd = "Abington1";
 
     private final String urlString = "https://emplkasperpsu1.service-now.com/api/now/table/u_datasensor6";
 
@@ -48,7 +48,10 @@ public class AsyncTaskTableTes4 extends AsyncTask<Void, Void, String> {
             con2.setRequestProperty("User-Agent", USER_AGENT);
             con2.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
             con2.setRequestProperty("Content-Type","application/json");
+
             String postJsonData = new Gson().toJson(dataObject);
+
+
             // Send post request
             con2.setDoOutput(true);
             DataOutputStream wr = new DataOutputStream(con2.getOutputStream());

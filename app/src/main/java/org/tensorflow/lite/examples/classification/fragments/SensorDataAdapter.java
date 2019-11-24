@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.tensorflow.lite.examples.classification.R;
+import org.tensorflow.lite.examples.classification.model.MissionDataObject;
 import org.tensorflow.lite.examples.classification.model.SensorDataObject;
 
 import java.util.List;
@@ -18,10 +19,15 @@ public class SensorDataAdapter extends RecyclerView.Adapter<SensorDataAdapter.My
 
     Context cxt;
     List<SensorDataObject> list;
+    List<MissionDataObject> mlist;
 
-    public SensorDataAdapter(Context context, List<SensorDataObject> list){
+
+
+    public SensorDataAdapter(Context context, List<SensorDataObject> list, List<MissionDataObject> mlist){
         this.list = list;
         this.cxt = context;
+        this.mlist = mlist;
+
     }
 
     @NonNull
@@ -41,8 +47,13 @@ public class SensorDataAdapter extends RecyclerView.Adapter<SensorDataAdapter.My
         holder.pressureTV.setText(cxt.getString(R.string.pressure_format,sdo.getPressure()));
         holder.humidityTV.setText(cxt.getString(R.string.relative_humidity_format,sdo.getRelativeHumidity()));
         holder.temperatureTV.setText(cxt.getString(R.string.ambient_temp_format, sdo.getAmbient_temp()));
-        holder.widthTV.setText(cxt.getString(R.string.mission_width_format, sdo.getU_width()));
-        holder.lengthTV.setText(cxt.getString(R.string.mission_length_format,sdo.getU_length()));
+
+        MissionDataObject mdo = mlist.get(position);
+        holder.widthTV.setText(cxt.getString(R.string.mission_width_format, mdo.getU_width()));
+        holder.lengthTV.setText(cxt.getString(R.string.mission_length_format,mdo.getU_length()));
+        holder.durationTV.setText(cxt.getString(R.string.mission_duration_format,mdo.getU_duration()));
+
+
     }
 
     @Override
@@ -60,6 +71,8 @@ public class SensorDataAdapter extends RecyclerView.Adapter<SensorDataAdapter.My
 
         TextView widthTV;
         TextView lengthTV;
+        TextView durationTV;
+
 
        public MyViewHolder(@NonNull View itemView) {
            super(itemView);
@@ -68,8 +81,11 @@ public class SensorDataAdapter extends RecyclerView.Adapter<SensorDataAdapter.My
            pressureTV = itemView.findViewById(R.id.pressure);
            humidityTV = itemView.findViewById(R.id.humidity);
            temperatureTV = itemView.findViewById(R.id.temp);
+
            widthTV = itemView.findViewById(R.id.width);
            lengthTV = itemView.findViewById(R.id.length);
+           durationTV = itemView.findViewById(R.id.duration);
+
 
        }
    }

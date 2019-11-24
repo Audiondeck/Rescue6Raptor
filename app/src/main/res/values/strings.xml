@@ -38,6 +38,7 @@
 
     <string name="mission_width_format">Mission Width : %1$f</string>
     <string name="mission_length_format">Mission Length : %1$f</string>
+    <string name="mission_duration_format">Mission Duration : %1$d</string>
 
 
     <string name="fingerprint_not_recognized">Fingerprint not recognized. Try again</string>

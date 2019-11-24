@@ -52,8 +52,6 @@ public class SensorReaderDbHelper extends SQLiteOpenHelper {
         values.put(SensorReaderContract.SensorEntry.COLUMN_NAME_RELATIVE_HUMIDITY, data.getRelativeHumidity());
         values.put(SensorReaderContract.SensorEntry.COLUMN_NAME_PRESSURE, data.getPressure());
         values.put(SensorReaderContract.SensorEntry.COLUMN_NAME_TEMPERATURE, data.getAmbient_temp());
-        values.put(SensorReaderContract.SensorEntry.COLUMN_NAME_MISSION_WIDTH, data.getU_width());
-        values.put(SensorReaderContract.SensorEntry.COLUMN_NAME_MISSION_Length, data.getU_length());
 
         SQLiteDatabase db = getWritableDatabase();
         try {
@@ -78,8 +76,6 @@ public class SensorReaderDbHelper extends SQLiteOpenHelper {
                 sdo.setPressure(cursor.getFloat(cursor.getColumnIndex(SensorReaderContract.SensorEntry.COLUMN_NAME_PRESSURE)));
                 sdo.setRelativeHumidity(cursor.getFloat(cursor.getColumnIndex(SensorReaderContract.SensorEntry.COLUMN_NAME_RELATIVE_HUMIDITY)));
                 sdo.setAmbient_temp(cursor.getFloat(cursor.getColumnIndex(SensorReaderContract.SensorEntry.COLUMN_NAME_TEMPERATURE)));
-                sdo.setU_width(cursor.getFloat(cursor.getColumnIndex(SensorReaderContract.SensorEntry.COLUMN_NAME_MISSION_WIDTH)));
-                sdo.setU_length(cursor.getFloat(cursor.getColumnIndex(SensorReaderContract.SensorEntry.COLUMN_NAME_MISSION_Length)));
                 result.add(sdo);
             }
             cursor.close();

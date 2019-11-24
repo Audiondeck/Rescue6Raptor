@@ -32,8 +32,8 @@ public class NewMissionDialogFragment extends DialogFragment implements View.OnC
     private EditText etWidth;
     private EditText etLength;
 
-    private int mWidth;
-    private int mLength;
+    private float mWidth;
+    private float mLength;
 
 
     public NewMissionDialogFragment() {
@@ -97,28 +97,21 @@ public class NewMissionDialogFragment extends DialogFragment implements View.OnC
     public void onClick(View view) {
         duration = Integer.parseInt(durationTV.getText().toString());
 
-        mLength = Integer.parseInt(etLength.getText().toString());
+        mLength = Float.parseFloat(etLength.getText().toString());
 
-        mWidth = Integer.parseInt(etWidth.getText().toString());
+        mWidth = Float.parseFloat(etWidth.getText().toString());
 
         mViewModel.setmDuration(duration);
         if (mListener != null) {
-            mListener.onStartMission(mViewModel.getmDuration(), mLength, mWidth);
+            mListener.onStartMission(mViewModel.getmDuration(), mLength, mWidth, duration);
         }
 
 
         dismiss();
     }
 
-    public int getmLength() {
-        return mLength;
-    }
-
-    public int getmWidth() {
-        return mWidth;
-    }
 
     public interface OnFragmentInteractionListener {
-        void onStartMission(int minutes, int mLength, int mWidth);
+        void onStartMission(int minutes, float mLength, float mWidth, int duration);
     }
 }

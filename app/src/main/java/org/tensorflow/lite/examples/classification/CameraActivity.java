@@ -675,10 +675,10 @@ public abstract class CameraActivity extends AppCompatActivity
   }
 
   @Override
-  public void onStartMission(int minutes, int mLength, int mWidth) {
+  public void onStartMission(int minutes, float mLength, float mWidth, int duration) {
     for(androidx.fragment.app.Fragment fragment : getSupportFragmentManager ().getFragments()){
       if(fragment instanceof HomeFragment){
-        ((HomeFragment)fragment).onStartMission(minutes, mLength, mWidth);
+        ((HomeFragment)fragment).onStartMission(minutes, mLength, mWidth, duration);
         break;
       }
     }

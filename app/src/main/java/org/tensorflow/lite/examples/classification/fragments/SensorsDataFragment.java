@@ -14,7 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.tensorflow.lite.examples.classification.R;
+import org.tensorflow.lite.examples.classification.model.MissionDataObject;
 import org.tensorflow.lite.examples.classification.model.SensorDataObject;
+import org.tensorflow.lite.examples.classification.sqlite.MissionTableDbHelper;
 import org.tensorflow.lite.examples.classification.sqlite.SensorReaderDbHelper;
 
 import java.util.List;
@@ -48,6 +50,8 @@ public class SensorsDataFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         List<SensorDataObject> list = new SensorReaderDbHelper(getContext()).getSensorData();
-        recyclerView.setAdapter(new SensorDataAdapter(getContext(),list));
+        List<MissionDataObject> mlist = new MissionTableDbHelper(getContext()).getMissionData();
+        recyclerView.setAdapter(new SensorDataAdapter(getContext(),list, mlist));
     }
 }
+

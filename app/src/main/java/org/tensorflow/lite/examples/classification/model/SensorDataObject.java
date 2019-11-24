@@ -15,25 +15,8 @@ public class SensorDataObject {
     float u_ambient_temp;
     float u_pressure;
     float u_relative_humidity;
-    float u_width;
-    float u_length;
 
 
-    public float getU_width() {
-        return u_width;
-    }
-
-    public void setU_width(float u_width) {
-        this.u_width = u_width;
-    }
-
-    public float getU_length() {
-        return u_length;
-    }
-
-    public void setU_length(float u_length) {
-        this.u_length = u_length;
-    }
     public float getLight() {
         return u_light;
     }
@@ -99,6 +82,6 @@ public class SensorDataObject {
                 +", accZ:"+u_acc_z
                 +", Ambient Temperature:"+u_ambient_temp
                 +", Pressure:"+u_pressure
-                +", Relative Humidity"+u_relative_humidity;
+                +", Relative Humidity:"+u_relative_humidity;
     }
 }

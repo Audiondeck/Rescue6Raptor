@@ -1,7 +1,6 @@
 package org.tensorflow.lite.examples.classification.fragments;
 
 import android.app.Application;
-import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.Sensor;
@@ -19,8 +18,11 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import org.tensorflow.lite.examples.classification.model.MissionDataObject;
 import org.tensorflow.lite.examples.classification.model.SensorDataObject;
+import org.tensorflow.lite.examples.classification.servicenow.AsyncMission;
 import org.tensorflow.lite.examples.classification.servicenow.AsyncTaskTableTes4;
+import org.tensorflow.lite.examples.classification.sqlite.MissionTableDbHelper;
 import org.tensorflow.lite.examples.classification.sqlite.SensorReaderDbHelper;
 
 import static android.content.Context.BATTERY_SERVICE;
@@ -30,12 +32,16 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
     private MutableLiveData<String> mBattery;
     private MutableLiveData<String> mWifi;
     private MutableLiveData<String> mBluetooth;
+
     private MutableLiveData<SensorDataObject> dataObjectMutableLiveData;
     private MutableLiveData<Boolean> isMission;
+    private MutableLiveData<MissionDataObject> missionDataObjectMutableLiveData;
 
     private CountDownTimer missionTimer;
     private SensorDataObject sensorDO;
+    private MissionDataObject missionDO;
     private SensorReaderDbHelper dbHelper;
+    private MissionTableDbHelper mdbHelper;
 
     // capture sensor details when there is an active mission
     private SensorManager manager;
@@ -49,10 +55,13 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
         super(context);
         mBattery = new MutableLiveData<>();
         mWifi = new MutableLiveData<>();
-        mBluetooth = new MutableLiveData<>();
         dataObjectMutableLiveData = new MutableLiveData<>();
+        mBluetooth = new MutableLiveData<>();
+
+        missionDataObjectMutableLiveData = new MutableLiveData<>();
         isMission = new MutableLiveData<>();
 
+        mdbHelper = new MissionTableDbHelper(context);
         dbHelper = new SensorReaderDbHelper(context);
 
         BatteryManager bm = (BatteryManager) context.getSystemService(BATTERY_SERVICE);
@@ -70,17 +79,9 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
         } else {
             mWifi.setValue("Wifi: Not Connected");
         }
-
-
-        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        if (bluetoothAdapter == null)
-            mBluetooth.setValue("Device does not support Bluetooth");
-        else if (bluetoothAdapter.isEnabled())
-            mBluetooth.setValue("Bluetooth enabled");
-        else
-            mBluetooth.setValue("Bluetooth disabled");
-
     }
+
+
 
     public LiveData<String> getBattery() {
         return mBattery;
@@ -98,6 +99,10 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
         return dataObjectMutableLiveData;
     }
 
+/*    public LiveData<MissionDataObject> getMissionDO(){
+        return missionDataObjectMutableLiveData;
+    }*/
+
     public MutableLiveData<Boolean> getIsMission() {
         return isMission;
     }
@@ -111,18 +116,19 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
         relativeHumiditySensor = manager.getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY);
         ambientTempSensor = manager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE);
 
+        missionDO = new MissionDataObject();
         sensorDO = new SensorDataObject();
 
         boolean isavailable = manager.registerListener(this, accSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        Log.i(HomeViewModel.class.getSimpleName(), "Accelerometer " + isavailable);
+        Log.i(HomeViewModel.class.getSimpleName(), "Accelerometer "+isavailable);
         isavailable = manager.registerListener(this, lightSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        Log.i(HomeViewModel.class.getSimpleName(), "Light Sensor " + isavailable);
+        Log.i(HomeViewModel.class.getSimpleName(), "Light Sensor "+isavailable);
         isavailable = manager.registerListener(this, pressureSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        Log.i(HomeViewModel.class.getSimpleName(), "Pressure " + isavailable);
+        Log.i(HomeViewModel.class.getSimpleName(), "Pressure "+isavailable);
         isavailable = manager.registerListener(this, relativeHumiditySensor, SensorManager.SENSOR_DELAY_NORMAL);
-        Log.i(HomeViewModel.class.getSimpleName(), "Relative Humidity " + isavailable);
+        Log.i(HomeViewModel.class.getSimpleName(), "Relative Humidity "+isavailable);
         isavailable = manager.registerListener(this, ambientTempSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        Log.i(HomeViewModel.class.getSimpleName(), "Ambient Temperature " + isavailable);
+        Log.i(HomeViewModel.class.getSimpleName(), "Ambient Temperature "+isavailable);
     }
 
     @Override
@@ -166,7 +172,7 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
         }
     }
 
-    public void onStartMission(int minutes, int mLength, int mWidth) {
+    public void onStartMission(int minutes, float mLength, float mWidth, int duration) {
         missionTimer = new CountDownTimer(minutes * 60 * 1000, 30 * 1000) {
 
             @Override
@@ -174,16 +180,27 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
                 // will be called every interval
                 // save to SQLite
 
-                sensorDO.setU_length(mLength);
-                sensorDO.setU_width(mWidth);
+                missionDO.setU_length(mLength);
+                missionDO.setU_width(mWidth);
+                missionDO.setU_duration(duration);
+
+                MissionDataObject mdo = missionDO;
+                missionDO = new MissionDataObject();
+
                 SensorDataObject sdo = sensorDO;
                 sensorDO = new SensorDataObject();
 
+                mdbHelper.insertMissionData(mdo);
+
                 long id = dbHelper.insertSensorData(sdo);
+
                 Log.i(HomeViewModel.class.getSimpleName(), "Save sensor data " + sdo.toString());
+
+                Log.i(HomeViewModel.class.getSimpleName(), "Mission Data" + mdo.toString());
 
                 // send to service now
                 new AsyncTaskTableTes4(sdo).execute();
+                new AsyncMission(mdo).execute();
             }
 
             @Override
@@ -197,9 +214,9 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
     }
 
     public void onDetached() {
-        if (missionTimer != null) {
+        if(missionTimer!=null){
             missionTimer.cancel();
-            missionTimer = null;
+            missionTimer=null;
         }
     }
 

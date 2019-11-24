@@ -132,8 +132,8 @@ public class HomeFragment extends Fragment {
         homeViewModel.onDetached();
     }
 
-    public void onStartMission(int minutes, int mLength, int mWidth) {
-        homeViewModel.onStartMission(minutes, mLength, mWidth);
+    public void onStartMission(int minutes, float mLength, float mWidth, int duration) {
+        homeViewModel.onStartMission(minutes, mLength, mWidth, duration);
     }
 
     public interface OnFragmentInteractionListener {

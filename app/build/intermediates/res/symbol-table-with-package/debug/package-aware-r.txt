@@ -1266,6 +1266,7 @@ id device_spinner
 id dimensions
 id direct
 id disableHome
+id duration
 id edit_query
 id encrypted_message
 id end
@@ -1655,6 +1656,7 @@ string mapbox_telemetryImproveMap
 string mapbox_telemetryLink
 string mapbox_telemetrySettings
 string mission_duration
+string mission_duration_format
 string mission_length_format
 string mission_width_format
 string model

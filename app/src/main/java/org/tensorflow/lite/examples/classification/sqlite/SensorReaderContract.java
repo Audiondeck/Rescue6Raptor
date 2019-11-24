@@ -17,8 +17,6 @@ public final class SensorReaderContract {
         public static final String COLUMN_NAME_PRESSURE = "pressure";
         public static final String COLUMN_NAME_RELATIVE_HUMIDITY = "humidity";
         public static final String COLUMN_NAME_TEMPERATURE = "temperature";
-        public static final String COLUMN_NAME_MISSION_WIDTH = "mission_width";
-        public static final String COLUMN_NAME_MISSION_Length = "mission_length";
     }
 
     static final String SQL_CREATE_ENTRIES =
@@ -30,9 +28,7 @@ public final class SensorReaderContract {
                     SensorEntry.COLUMN_NAME_TEMPERATURE + " REAL," +
                     SensorEntry.COLUMN_NAME_ACC_X + " REAL," +
                     SensorEntry.COLUMN_NAME_ACC_Y + " REAL," +
-                    SensorEntry.COLUMN_NAME_ACC_Z + " REAL," +
-                    SensorEntry.COLUMN_NAME_MISSION_WIDTH + " REAL," +
-                    SensorEntry.COLUMN_NAME_MISSION_Length + " REAL)"
+                    SensorEntry.COLUMN_NAME_ACC_Z + " REAL)"
             ;
 
 
