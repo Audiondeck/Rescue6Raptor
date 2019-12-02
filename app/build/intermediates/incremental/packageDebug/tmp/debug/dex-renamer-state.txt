@@ -1,7 +1,7 @@
-#Sun Nov 24 01:00:41 EST 2019
-base.0=F\:\\AndroidStudioProjects\\IST 440 Project\\Rescue6Raptor\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\out\\classes.dex
+#Sun Dec 01 18:48:52 EST 2019
+base.0=C\:\\Users\\delfr\\Desktop\\Rescue6Raptor-Dennis\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\out\\classes.dex
 path.1=classes.dex
 renamed.1=classes2.dex
 path.0=classes.dex
 renamed.0=classes.dex
-base.1=F\:\\AndroidStudioProjects\\IST 440 Project\\Rescue6Raptor\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\out\\classes.dex
+base.1=C\:\\Users\\delfr\\Desktop\\Rescue6Raptor-Dennis\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\out\\classes.dex

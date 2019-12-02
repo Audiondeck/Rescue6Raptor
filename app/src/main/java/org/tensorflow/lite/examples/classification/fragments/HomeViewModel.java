@@ -205,11 +205,13 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
 
             @Override
             public void onFinish() {
+                // send the soccer ball found/not status
                 missionTimer = null;
                 isMission.postValue(false);
             }
         };
         missionTimer.start();
+        // send the Mission data to service now and save to sqlite
         isMission.postValue(true);
     }
 

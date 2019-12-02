@@ -537,7 +537,8 @@ public abstract class CameraActivity extends AppCompatActivity
       for(androidx.fragment.app.Fragment fragment : getSupportFragmentManager().getFragments()){
         if(fragment instanceof CameraFragment){
           ((CameraFragment)fragment).onItemDetected(recognition);
-          break;
+        } else if (fragment instanceof HomeFragment){
+           // update the object detection
         }
       }
 

@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "F:\\AndroidStudioProjects\\IST 440 Project\\Rescue6Raptor\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-port\\values-port.xml",
+            "outputFile": "C:\\Users\\delfr\\Desktop\\Rescue6Raptor-Dennis\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-port\\values-port.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\dennn\\.gradle\\caches\\transforms-2\\files-2.1\\61fd76c3f848cf55f45e843ab08cdd70\\appcompat-1.0.0\\res\\values-port\\values-port.xml",
+                    "source": "C:\\Users\\delfr\\.gradle\\caches\\transforms-2\\files-2.1\\61fd76c3f848cf55f45e843ab08cdd70\\appcompat-1.0.0\\res\\values-port\\values-port.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

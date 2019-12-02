@@ -46,8 +46,9 @@ public class CameraFragment extends Fragment {
                 return;
             }
 
-            if(recognition.getTitle().equals("soccer ball") && recognition.getConfidence() >= 55){
+            if(recognition.getTitle().equals("soccer ball") && recognition.getConfidence() >= 0.55){
                 foundView.setVisibility(View.VISIBLE);
+
             } else {
                 foundView.setVisibility(View.INVISIBLE);
             }
