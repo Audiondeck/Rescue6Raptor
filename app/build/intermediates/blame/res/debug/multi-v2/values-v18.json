@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\delfr\\Desktop\\Rescue6Raptor-Dennis\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v18\\values-v18.xml",
+            "outputFile": "C:\\Users\\Dennis\\Desktop\\shared\\Rescue6RaptorConf\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v18\\values-v18.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\delfr\\.gradle\\caches\\transforms-2\\files-2.1\\61fd76c3f848cf55f45e843ab08cdd70\\appcompat-1.0.0\\res\\values-v18\\values-v18.xml",
+                    "source": "C:\\Users\\Dennis\\.gradle\\caches\\transforms-2\\files-2.1\\61fd76c3f848cf55f45e843ab08cdd70\\appcompat-1.0.0\\res\\values-v18\\values-v18.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

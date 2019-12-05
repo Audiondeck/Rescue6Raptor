@@ -24,7 +24,6 @@ public class MissionTableDbHelper  extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase mdb) {
         mdb.execSQL(MissionTable.SQL_CREATE_ENTRIES);
 
-
     }
 
     @Override
@@ -44,7 +43,6 @@ public class MissionTableDbHelper  extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(MissionTable.MissionEntry.COLUMN_NAME_MISSION_DURATION, data.getU_duration());
        //Not Implemented yet
-        // values.put(MissionTable.MissionEntry.COLUMN_NAME_MISSION_RUNTIME, data.);
         values.put(MissionTable.MissionEntry.COLUMN_NAME_MISSION_Length, data.getU_length());
         values.put(MissionTable.MissionEntry.COLUMN_NAME_MISSION_WIDTH, data.getU_width());
 

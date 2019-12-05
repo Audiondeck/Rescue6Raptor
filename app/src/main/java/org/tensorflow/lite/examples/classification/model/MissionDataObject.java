@@ -5,10 +5,12 @@ import androidx.annotation.NonNull;
 
 public class MissionDataObject {
 
+
     float u_width;
     float u_length;
 
     int u_duration;
+
 
 
     public int getU_duration() {
@@ -35,6 +37,7 @@ public class MissionDataObject {
         this.u_length = u_length;
     }
 
+    //Name matches with ServiceNow
     @NonNull
     @Override
     public String toString() {
