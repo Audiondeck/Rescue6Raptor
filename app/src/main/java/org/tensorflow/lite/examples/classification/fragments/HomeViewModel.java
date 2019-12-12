@@ -14,9 +14,19 @@ import android.os.Build;
 import android.os.CountDownTimer;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResponse;
+import com.google.android.gms.location.SettingsClient;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 
 import org.tensorflow.lite.examples.classification.model.MissionDataObject;
 import org.tensorflow.lite.examples.classification.model.SensorDataObject;
@@ -38,7 +48,7 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
     private MutableLiveData<MissionDataObject> missionDataObjectMutableLiveData;
 
     private CountDownTimer missionTimer;
-    private SensorDataObject sensorDO;
+    SensorDataObject sensorDO;
     private MissionDataObject missionDO;
     private SensorReaderDbHelper dbHelper;
     private MissionTableDbHelper mdbHelper;
@@ -82,7 +92,6 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
     }
 
 
-
     public LiveData<String> getBattery() {
         return mBattery;
     }
@@ -120,15 +129,15 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
         sensorDO = new SensorDataObject();
 
         boolean isavailable = manager.registerListener(this, accSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        Log.i(HomeViewModel.class.getSimpleName(), "Accelerometer "+isavailable);
+        Log.i(HomeViewModel.class.getSimpleName(), "Accelerometer " + isavailable);
         isavailable = manager.registerListener(this, lightSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        Log.i(HomeViewModel.class.getSimpleName(), "Light Sensor "+isavailable);
+        Log.i(HomeViewModel.class.getSimpleName(), "Light Sensor " + isavailable);
         isavailable = manager.registerListener(this, pressureSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        Log.i(HomeViewModel.class.getSimpleName(), "Pressure "+isavailable);
+        Log.i(HomeViewModel.class.getSimpleName(), "Pressure " + isavailable);
         isavailable = manager.registerListener(this, relativeHumiditySensor, SensorManager.SENSOR_DELAY_NORMAL);
-        Log.i(HomeViewModel.class.getSimpleName(), "Relative Humidity "+isavailable);
+        Log.i(HomeViewModel.class.getSimpleName(), "Relative Humidity " + isavailable);
         isavailable = manager.registerListener(this, ambientTempSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        Log.i(HomeViewModel.class.getSimpleName(), "Ambient Temperature "+isavailable);
+        Log.i(HomeViewModel.class.getSimpleName(), "Ambient Temperature " + isavailable);
     }
 
     @Override
@@ -170,6 +179,8 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
             manager.unregisterListener(this, ambientTempSensor);
             manager.unregisterListener(this, relativeHumiditySensor);
         }
+
+        // TODO stop location updates
     }
 
     public void onStartMission(int minutes, float mLength, float mWidth, int duration) {
@@ -216,9 +227,9 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
     }
 
     public void onDetached() {
-        if(missionTimer!=null){
+        if (missionTimer != null) {
             missionTimer.cancel();
-            missionTimer=null;
+            missionTimer = null;
         }
     }
 

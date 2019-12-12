@@ -15,6 +15,7 @@ public class SensorDataObject {
     float u_ambient_temp;
     float u_pressure;
     float u_relative_humidity;
+    double u_latitude;
 
 
     public float getLight() {
@@ -73,6 +74,14 @@ public class SensorDataObject {
         return u_relative_humidity;
     }
 
+    public double getLatitude() {
+        return u_latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.u_latitude = latitude;
+    }
+
     @NonNull
     @Override
     public String toString() {
@@ -82,6 +91,7 @@ public class SensorDataObject {
                 +", accZ:"+u_acc_z
                 +", Ambient Temperature:"+u_ambient_temp
                 +", Pressure:"+u_pressure
-                +", Relative Humidity:"+u_relative_humidity;
+                +", Relative Humidity:"+u_relative_humidity
+                +", Latitude:"+u_latitude;
     }
 }

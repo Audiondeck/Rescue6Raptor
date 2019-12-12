@@ -1,7 +1,10 @@
 package org.tensorflow.lite.examples.classification.fragments;
 
 import android.content.Context;
+import android.location.Location;
 import android.os.Bundle;
+import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +17,18 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResponse;
+import com.google.android.gms.location.SettingsClient;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+
 import org.tensorflow.lite.examples.classification.R;
 import org.tensorflow.lite.examples.classification.model.SensorDataObject;
 
@@ -23,13 +38,15 @@ public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
 
-    TextView bluetooth;
-    TextView accTV;
-    TextView lightTV;
-    TextView pressureTV;
-    TextView ambientTempTV;
-    TextView relativeHumidityTV;
-    Button startMissionButton;
+    private TextView bluetooth;
+    private TextView accTV;
+    private TextView lightTV;
+    private TextView pressureTV;
+    private TextView ambientTempTV;
+    private TextView relativeHumidityTV;
+    private TextView latLngTV;
+    private Button startMissionButton;
+    private FusedLocationProviderClient fusedLocationProviderClient;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -45,6 +62,7 @@ public class HomeFragment extends Fragment {
         pressureTV = root.findViewById(R.id.pressure);
         ambientTempTV = root.findViewById(R.id.ambientTemp);
         relativeHumidityTV = root.findViewById(R.id.relativeHumidity);
+        latLngTV = root.findViewById(R.id.lat_lng);
 
         homeViewModel.getBattery().observe(this, new Observer<String>() {
             @Override
@@ -76,6 +94,10 @@ public class HomeFragment extends Fragment {
                 pressureTV.setText(getString(R.string.pressure_format, dataObject.getPressure()));
                 ambientTempTV.setText(getString(R.string.ambient_temp_format, dataObject.getAmbient_temp()));
                 relativeHumidityTV.setText(getString(R.string.relative_humidity_format, dataObject.getRelativeHumidity()));
+
+                if(mLocation!=null) {
+                    homeViewModel.sensorDO.setLatitude(mLocation.getLatitude());
+                }
             }
         });
 
@@ -105,12 +127,14 @@ public class HomeFragment extends Fragment {
     public void onResume() {
         super.onResume();
         homeViewModel.activatePhoneSensors();
+        createLocationRequest();
     }
 
     @Override
     public void onPause() {
         super.onPause();
         homeViewModel.stopPhoneSensors();
+        stopLocationRequest();
     }
 
     @Override
@@ -139,5 +163,59 @@ public class HomeFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         void onStartMissionButtonPressed();
     }
+
+    protected void createLocationRequest() {
+        LocationRequest locationRequest = LocationRequest.create();
+        locationRequest.setInterval(10000); // 10 sec  = 10 * 1000 milliseconds
+        locationRequest.setFastestInterval(5000); // 5 sec  =  5 * 1000 milliseconds
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
+                .addLocationRequest(locationRequest);
+
+        SettingsClient client = LocationServices.getSettingsClient(getActivity());
+        Task<LocationSettingsResponse> task = client.checkLocationSettings(builder.build());
+
+        task.addOnSuccessListener(getActivity(), new OnSuccessListener<LocationSettingsResponse>() {
+            @Override
+            public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
+                Log.i(HomeViewModel.class.getSimpleName(), "Location service is ready to read");
+                fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
+                fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper());
+            }
+        });
+
+        task.addOnFailureListener(getActivity(), new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.i(HomeViewModel.class.getSimpleName(), "Failed to request location service");
+            }
+        });
+    }
+
+    // Stop the location update when user quits the app
+    private void stopLocationRequest(){
+        if(fusedLocationProviderClient!=null){
+            fusedLocationProviderClient.removeLocationUpdates(locationCallback);
+        }
+    }
+
+    private Location mLocation;
+    private LocationCallback locationCallback = new LocationCallback() {
+        @Override
+        public void onLocationResult(LocationResult locationResult) {
+            super.onLocationResult(locationResult);
+            if (locationResult == null) {
+                return;
+            }
+            for (Location location : locationResult.getLocations()) {
+                mLocation = location;
+                latLngTV.setText("Latitude:" + location.getLatitude() +
+                        "\nLongitude:" + location.getLongitude() +
+                        "\nAltitude:" + location.getAltitude());
+                break;
+            }
+        }
+    };
 
 }

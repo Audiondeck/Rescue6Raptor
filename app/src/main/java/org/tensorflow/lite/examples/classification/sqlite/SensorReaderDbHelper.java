@@ -41,6 +41,11 @@ public class SensorReaderDbHelper extends SQLiteOpenHelper {
         onUpgrade(db, oldVersion, newVersion);
     }
 
+    /**
+     * Insert sensor data object in to SQLite Table
+     * @param data
+     * @return
+     */
     public long insertSensorData(SensorDataObject data){
 
         // Create a new map of values, where column names are the keys
@@ -52,6 +57,7 @@ public class SensorReaderDbHelper extends SQLiteOpenHelper {
         values.put(SensorReaderContract.SensorEntry.COLUMN_NAME_RELATIVE_HUMIDITY, data.getRelativeHumidity());
         values.put(SensorReaderContract.SensorEntry.COLUMN_NAME_PRESSURE, data.getPressure());
         values.put(SensorReaderContract.SensorEntry.COLUMN_NAME_TEMPERATURE, data.getAmbient_temp());
+        values.put(SensorReaderContract.SensorEntry.COLUMN_NAME_LATITUDE, data.getLatitude());
 
         SQLiteDatabase db = getWritableDatabase();
         try {
@@ -62,6 +68,10 @@ public class SensorReaderDbHelper extends SQLiteOpenHelper {
         }
     }
 
+    /**
+     * Read data from SQLite table. Helps to show the list on the mobile screen
+     * @return list of sensor objects
+     */
     public List<SensorDataObject> getSensorData(){
         List<SensorDataObject> result = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
@@ -76,6 +86,7 @@ public class SensorReaderDbHelper extends SQLiteOpenHelper {
                 sdo.setPressure(cursor.getFloat(cursor.getColumnIndex(SensorReaderContract.SensorEntry.COLUMN_NAME_PRESSURE)));
                 sdo.setRelativeHumidity(cursor.getFloat(cursor.getColumnIndex(SensorReaderContract.SensorEntry.COLUMN_NAME_RELATIVE_HUMIDITY)));
                 sdo.setAmbient_temp(cursor.getFloat(cursor.getColumnIndex(SensorReaderContract.SensorEntry.COLUMN_NAME_TEMPERATURE)));
+                sdo.setLatitude(cursor.getDouble(cursor.getColumnIndex(SensorReaderContract.SensorEntry.COLUMN_NAME_LATITUDE)));
                 result.add(sdo);
             }
             cursor.close();

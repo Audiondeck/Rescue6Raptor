@@ -45,6 +45,11 @@
         android:layout_height="wrap_content"/>
     <TextView
         style="@style/TextAppearance.AppCompat.Large"
+        android:id="@+id/latitude"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        style="@style/TextAppearance.AppCompat.Large"
         android:id="@+id/width"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

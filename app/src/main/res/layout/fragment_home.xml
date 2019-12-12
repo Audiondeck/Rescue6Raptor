@@ -99,7 +99,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:textColor="@android:color/white"
-        android:text="Latitude:23.524523\nLongitude:43.123423"
+        android:text="Latitude:23.524523\nLongitude:43.123423\nAltitude:63.12344556"
         app:layout_constraintStart_toEndOf="@id/location"
         app:layout_constraintTop_toBottomOf="@+id/location" />
 
