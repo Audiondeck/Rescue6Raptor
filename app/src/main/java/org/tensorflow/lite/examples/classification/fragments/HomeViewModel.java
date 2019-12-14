@@ -46,6 +46,7 @@ import static android.content.Context.BATTERY_SERVICE;
 public class HomeViewModel extends AndroidViewModel implements SensorEventListener {
 
     private MutableLiveData<String> mBattery;
+    private MutableLiveData<String> mBattery_percentage;
     private MutableLiveData<String> mWifi;
     private MutableLiveData<String> mBluetooth;
 
@@ -74,6 +75,7 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
     public HomeViewModel(Application context) {
         super(context);
         mBattery = new MutableLiveData<>();
+        mBattery_percentage = new MutableLiveData<>();
         mWifi = new MutableLiveData<>();
         dataObjectMutableLiveData = new MutableLiveData<>();
         mBluetooth = new MutableLiveData<>();
@@ -92,6 +94,7 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             int percentage = bm.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY);
             mBattery.setValue("Battery Percentage: " + percentage + "%");
+            mBattery_percentage.setValue(percentage+"");
         }
 
         ConnectivityManager connectionManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -164,6 +167,7 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
                 sensorDO.setAccx(values[0]);
                 sensorDO.setAccy(values[1]);
                 sensorDO.setAccz(values[2]);
+                sensorDO.setU_batttery_level(Float.parseFloat(mBattery_percentage.getValue()));
                 break;
             case Sensor.TYPE_LIGHT:
                 sensorDO.setLight(values[0]);
@@ -177,6 +181,7 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
             case Sensor.TYPE_RELATIVE_HUMIDITY:
                 sensorDO.setRelativeHumidity(values[0]);
                 break;
+
         }
         dataObjectMutableLiveData.postValue(sensorDO);
     }
@@ -203,8 +208,8 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
 
 
 
-    public void onStartMission(int minutes, float mLength, float mWidth, int duration, String roverID) {
-        missionTimer = new CountDownTimer(minutes * 60 * 1000, 30 * 1000) {
+    public void onStartMission(int minutes, float mLength, float mWidth, int duration, String roverTeam) {
+        missionTimer = new CountDownTimer(minutes * 30 * 1000, 10 * 1000) {
             //Run Counter to ensure Mission and Rover table only gets hit once
             int run = 0;
 
@@ -216,7 +221,7 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
                 missionDO.setU_grid_length(mLength);
                 missionDO.setU_grid_width(mWidth);
                 missionDO.setU_mission_duration(duration);
-                roverDO.setU_roverID(roverID);
+                roverDO.setRover_Name(roverTeam);
 
 
 
@@ -227,10 +232,11 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
                 RoverDataObject rdo = roverDO;
                 roverDO = new RoverDataObject();
 
+
                 missionDO.setU_grid_length(mLength);
                 missionDO.setU_grid_width(mWidth);
                 missionDO.setU_mission_duration(duration);
-                roverDO.setU_roverID(roverID);
+                roverDO.setRover_Name(roverTeam);
 
 
                 //Insert Sensor data to SQL
@@ -254,8 +260,9 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
                     } catch (ExecutionException | InterruptedException e) {
                         e.printStackTrace();
                     }
-                    //Sets Rover Name to Rover Data Object
-                    rdo.setRover_Name(aResult);
+                    //Sets Rover ID to Rover Data Object
+                    rdo.setU_roverID(aResult);
+                    //Sets Mission Data
                     mdo.setU_mission_id(mResult);
 
 
@@ -278,8 +285,9 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
                     Log.i(HomeViewModel.class.getSimpleName(), "Save sensor data " + sdo.toString());
 
 
-                    //Sets Rover Name to Rover Data Object
-                    rdo.setRover_Name(aResult);
+                    //Sets Rover ID to Rover Data Object
+                    rdo.setU_roverID(aResult);
+                    //Sets Mission ID to Mission Data Object
                     mdo.setU_mission_id(mResult);
 
 

@@ -20,6 +20,7 @@ public final class SensorReaderContract {
         public static final String COLUMN_NAME_LATITUDE = "latitude";
         public static final String COLUMN_NAME_LONGITUDE = "longitude";
         public static final String COLUMN_NAME_ALTITUDE = "altitude";
+        public static final String COLUMN_NAME_BATTERY ="battery";
 
     }
 
@@ -35,7 +36,8 @@ public final class SensorReaderContract {
                     SensorEntry.COLUMN_NAME_ALTITUDE + " REAL," +
                     SensorEntry.COLUMN_NAME_ACC_X + " REAL," +
                     SensorEntry.COLUMN_NAME_ACC_Y + " REAL," +
-                    SensorEntry.COLUMN_NAME_ACC_Z + " REAL)"
+                    SensorEntry.COLUMN_NAME_ACC_Z + " REAL," +
+                    SensorEntry.COLUMN_NAME_BATTERY + " REAL)"
             ;
 
 

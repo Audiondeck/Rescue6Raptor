@@ -61,6 +61,7 @@ public class SensorReaderDbHelper extends SQLiteOpenHelper {
         values.put(SensorReaderContract.SensorEntry.COLUMN_NAME_LATITUDE, data.getLatitude());
         values.put(SensorReaderContract.SensorEntry.COLUMN_NAME_LONGITUDE, data.getLongitude());
         values.put(SensorReaderContract.SensorEntry.COLUMN_NAME_ALTITUDE, data.getAltitude());
+        values.put(SensorReaderContract.SensorEntry.COLUMN_NAME_BATTERY, data.getU_batttery_level());
 
         SQLiteDatabase db = getWritableDatabase();
         try {
@@ -92,6 +93,7 @@ public class SensorReaderDbHelper extends SQLiteOpenHelper {
                 sdo.setLatitude(cursor.getDouble(cursor.getColumnIndex(SensorReaderContract.SensorEntry.COLUMN_NAME_LATITUDE)));
                 sdo.setLongitude(cursor.getDouble(cursor.getColumnIndex(SensorReaderContract.SensorEntry.COLUMN_NAME_LONGITUDE)));
                 sdo.setAltitude(cursor.getDouble(cursor.getColumnIndex(SensorReaderContract.SensorEntry.COLUMN_NAME_ALTITUDE)));
+                sdo.setU_batttery_level(cursor.getFloat(cursor.getColumnIndex(SensorReaderContract.SensorEntry.COLUMN_NAME_BATTERY)));
                 result.add(sdo);
             }
             cursor.close();

@@ -20,6 +20,15 @@ public class SensorDataObject {
     double u_altitude;
     boolean u_object_found;
 
+    float u_batttery_level;
+
+    public void setU_batttery_level(float u_batttery_level) {
+        this.u_batttery_level = u_batttery_level;
+    }
+
+    public float getU_batttery_level() {
+        return u_batttery_level;
+    }
 
     public float getLight() {
         return u_ambient_light;
@@ -122,6 +131,7 @@ public class SensorDataObject {
                 +", Latitude:"+u_latitude
                 +", Longitude:"+u_longitude
                 +", Altitude:"+u_altitude
-                +", Objectfound:"+u_object_found;
+                +", Objectfound:"+u_object_found
+                +", Battery Level:"+ u_batttery_level;
     }
 }

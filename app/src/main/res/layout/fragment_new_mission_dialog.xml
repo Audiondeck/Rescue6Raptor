@@ -15,7 +15,7 @@
         android:layout_width="185dp"
         android:layout_height="46dp"
         android:layout_marginTop="28dp"
-        android:text="Set Rover ID:"
+        android:text="Set Rover Team:"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +34,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/in_roverID"
+        android:id="@+id/in_roverTeam"
         android:layout_width="183dp"
         android:layout_height="47dp"
         android:layout_marginStart="20dp"

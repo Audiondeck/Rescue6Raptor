@@ -1,25 +1,19 @@
 package org.tensorflow.lite.examples.classification.fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatSeekBar;
 import androidx.fragment.app.DialogFragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import org.tensorflow.lite.examples.classification.R;
-
-import java.util.ArrayList;
 
 public class NewMissionDialogFragment extends DialogFragment implements View.OnClickListener{
 
@@ -28,9 +22,9 @@ public class NewMissionDialogFragment extends DialogFragment implements View.OnC
 
     private EditText durationTV;
     private int duration;
-    private String roverID;
+    private String roverTeam;
 
-    private EditText etRoverID;
+    private EditText etRoverTeam;
 
     private EditText etWidth;
     private EditText etLength;
@@ -65,7 +59,7 @@ public class NewMissionDialogFragment extends DialogFragment implements View.OnC
 
         etWidth = view.findViewById(R.id.in_width);
         etLength = view.findViewById(R.id.in_length);
-        etRoverID = view.findViewById(R.id.in_roverID);
+        etRoverTeam = view.findViewById(R.id.in_roverTeam);
 
 
         mViewModel = ViewModelProviders.of(this).get(NewMissionViewModel.class);
@@ -106,11 +100,11 @@ public class NewMissionDialogFragment extends DialogFragment implements View.OnC
 
         mWidth = Float.parseFloat(etWidth.getText().toString());
 
-        roverID = etRoverID.getText().toString();
+        roverTeam = etRoverTeam.getText().toString();
 
         mViewModel.setmDuration(duration);
         if (mListener != null) {
-            mListener.onStartMission(mViewModel.getmDuration(), mLength, mWidth, duration, roverID);
+            mListener.onStartMission(mViewModel.getmDuration(), mLength, mWidth, duration, roverTeam);
         }
 
 
@@ -119,6 +113,6 @@ public class NewMissionDialogFragment extends DialogFragment implements View.OnC
 
 
     public interface OnFragmentInteractionListener {
-        void onStartMission(int minutes, float mLength, float mWidth, int duration, String roverID);
+        void onStartMission(int minutes, float mLength, float mWidth, int duration, String roverTeam);
     }
 }

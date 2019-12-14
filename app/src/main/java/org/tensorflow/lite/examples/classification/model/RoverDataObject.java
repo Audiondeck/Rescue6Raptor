@@ -7,7 +7,7 @@ public class RoverDataObject {
     //Sets rover id
 
     String u_rover_Name ="";
-    String u_rover_id;
+    String u_rover_id ="";
 
 
     public void setU_roverID(String u_roverID){ this.u_rover_id = u_roverID;}
@@ -27,7 +27,7 @@ public class RoverDataObject {
     @Override
     public String toString() {
         return "Rover ID:"+u_rover_id
-                + ", Name:" + u_rover_Name;
+                + ",u_name:" + u_rover_Name;
 
     }
 

@@ -159,8 +159,8 @@ public class HomeFragment extends Fragment {
         homeViewModel.onDetached();
     }
 
-    public void onStartMission(int minutes, float mLength, float mWidth, int duration, String roverID) {
-        homeViewModel.onStartMission(minutes, mLength, mWidth, duration, roverID);
+    public void onStartMission(int minutes, float mLength, float mWidth, int duration, String roverTeam) {
+        homeViewModel.onStartMission(minutes, mLength, mWidth, duration, roverTeam);
     }
 
     public interface OnFragmentInteractionListener {

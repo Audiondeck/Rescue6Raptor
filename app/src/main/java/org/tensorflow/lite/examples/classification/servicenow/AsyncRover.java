@@ -36,8 +36,10 @@ public class AsyncRover extends AsyncTask<Void, Void, String> {
 
     String SNGet;
 
+    String u_number;
+
     String u_name;
-    String i_number;
+    String i_team;
 
     private final RoverDataObject roverDataObject;
 
@@ -77,7 +79,7 @@ public class AsyncRover extends AsyncTask<Void, Void, String> {
             in.close();
             con2.disconnect();
 
-            i_number = roverDataObject.getU_roverID();
+            i_team = roverDataObject.getRover_Name();
 
             //covert response to string
             SNGet = response.toString();
@@ -91,11 +93,11 @@ public class AsyncRover extends AsyncTask<Void, Void, String> {
                 //Get object info in JSON Array
                 JSONObject info = jsonArray.getJSONObject(i);
 
-                String u_number = info.get("u_number").toString();
+                String u_name = info.get("u_name").toString();
                 //Matches input with name
-                if (u_number.equals(i_number)){
-                    u_name = info.get("u_name").toString();
-                    System.out.println(u_name);
+                if (i_team.equals(u_name)){
+                    u_number = info.get("u_number").toString();
+                    System.out.println(u_number);
 
                 }
             }
@@ -104,7 +106,7 @@ public class AsyncRover extends AsyncTask<Void, Void, String> {
         } catch (Exception e){
             Log.e(AsyncRover.class.getSimpleName(), e.getMessage(), e);
         }
-        return u_name;
+        return u_number;
     }
     @Override
     protected void  onPostExecute(String Result){
