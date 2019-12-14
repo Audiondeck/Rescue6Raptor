@@ -48,13 +48,13 @@ public class SensorDataAdapter extends RecyclerView.Adapter<SensorDataAdapter.My
         holder.humidityTV.setText(cxt.getString(R.string.relative_humidity_format,sdo.getRelativeHumidity()));
         holder.temperatureTV.setText(cxt.getString(R.string.ambient_temp_format, sdo.getAmbient_temp()));
         holder.latitudeTV.setText(cxt.getString(R.string.latitude_format, sdo.getLatitude()));
+        holder.longitudeTV.setText(cxt.getString(R.string.longitude_format, sdo.getLongitude()));
+        holder.altitudeTV.setText (cxt.getString(R.string.altitude_format, sdo.getAltitude()));
 
         MissionDataObject mdo = mlist.get(position);
         holder.widthTV.setText(cxt.getString(R.string.mission_width_format, mdo.getU_width()));
         holder.lengthTV.setText(cxt.getString(R.string.mission_length_format,mdo.getU_length()));
         holder.durationTV.setText(cxt.getString(R.string.mission_duration_format,mdo.getU_duration()));
-
-
     }
 
     @Override
@@ -70,6 +70,8 @@ public class SensorDataAdapter extends RecyclerView.Adapter<SensorDataAdapter.My
         TextView humidityTV;
         TextView temperatureTV;
         TextView latitudeTV;
+        TextView longitudeTV;
+        TextView altitudeTV;
 
         TextView widthTV;
         TextView lengthTV;
@@ -84,6 +86,8 @@ public class SensorDataAdapter extends RecyclerView.Adapter<SensorDataAdapter.My
            humidityTV = itemView.findViewById(R.id.humidity);
            temperatureTV = itemView.findViewById(R.id.temp);
            latitudeTV = itemView.findViewById(R.id.latitude);
+           longitudeTV = itemView.findViewById(R.id.longitude);
+           altitudeTV = itemView.findViewById(R.id.altitude);
 
            widthTV = itemView.findViewById(R.id.width);
            lengthTV = itemView.findViewById(R.id.length);

@@ -36,6 +36,8 @@
     <string name="ambient_temp_format">Ambient Temp %1$f °C</string>
     <string name="relative_humidity_format">Relative Humidity %1$f %%</string>
     <string name="latitude_format">Latitude %1$f</string>
+    <string name="longitude_format">Longitude %1$f</string>
+    <string name="altitude_format">Altitude %1$f</string>
 
     <string name="mission_width_format">Mission Width : %1$f</string>
     <string name="mission_length_format">Mission Length : %1$f</string>

@@ -31,6 +31,7 @@ import com.google.android.gms.tasks.Task;
 
 import org.tensorflow.lite.examples.classification.R;
 import org.tensorflow.lite.examples.classification.model.SensorDataObject;
+import org.tensorflow.lite.examples.classification.tflite.Classifier;
 
 
 public class HomeFragment extends Fragment {
@@ -97,6 +98,8 @@ public class HomeFragment extends Fragment {
 
                 if(mLocation!=null) {
                     homeViewModel.sensorDO.setLatitude(mLocation.getLatitude());
+                    homeViewModel.sensorDO.setLongitude(mLocation.getLongitude());
+                    homeViewModel.sensorDO.setAltitude(mLocation.getAltitude());
                 }
             }
         });
@@ -217,5 +220,28 @@ public class HomeFragment extends Fragment {
             }
         }
     };
+
+    boolean isLastUpdated = false;
+    public void onItemDetected(Classifier.Recognition recognition) {
+        if (recognition != null) {
+            if (recognition.getTitle() == null) {
+                return;
+            }
+            if (recognition.getConfidence() == null) {
+                return;
+            }
+
+            if(recognition.getTitle().equals("soccer ball") && recognition.getConfidence() >= 0.55){
+                //  insert immediately data in to service now that object has detected.
+                if(!isLastUpdated){
+                    isLastUpdated = true;
+                    homeViewModel.objectDetected();
+                }
+            } else {
+                isLastUpdated = false;
+            }
+        }
+    }
+
 
 }

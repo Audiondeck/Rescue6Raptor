@@ -11,6 +11,7 @@ import org.tensorflow.lite.examples.classification.R;
 import org.tensorflow.lite.examples.classification.model.SensorDataObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -58,6 +59,8 @@ public class SensorReaderDbHelper extends SQLiteOpenHelper {
         values.put(SensorReaderContract.SensorEntry.COLUMN_NAME_PRESSURE, data.getPressure());
         values.put(SensorReaderContract.SensorEntry.COLUMN_NAME_TEMPERATURE, data.getAmbient_temp());
         values.put(SensorReaderContract.SensorEntry.COLUMN_NAME_LATITUDE, data.getLatitude());
+        values.put(SensorReaderContract.SensorEntry.COLUMN_NAME_LONGITUDE, data.getLongitude());
+        values.put(SensorReaderContract.SensorEntry.COLUMN_NAME_ALTITUDE, data.getAltitude());
 
         SQLiteDatabase db = getWritableDatabase();
         try {
@@ -87,12 +90,16 @@ public class SensorReaderDbHelper extends SQLiteOpenHelper {
                 sdo.setRelativeHumidity(cursor.getFloat(cursor.getColumnIndex(SensorReaderContract.SensorEntry.COLUMN_NAME_RELATIVE_HUMIDITY)));
                 sdo.setAmbient_temp(cursor.getFloat(cursor.getColumnIndex(SensorReaderContract.SensorEntry.COLUMN_NAME_TEMPERATURE)));
                 sdo.setLatitude(cursor.getDouble(cursor.getColumnIndex(SensorReaderContract.SensorEntry.COLUMN_NAME_LATITUDE)));
+                sdo.setLongitude(cursor.getDouble(cursor.getColumnIndex(SensorReaderContract.SensorEntry.COLUMN_NAME_LONGITUDE)));
+                sdo.setAltitude(cursor.getDouble(cursor.getColumnIndex(SensorReaderContract.SensorEntry.COLUMN_NAME_ALTITUDE)));
                 result.add(sdo);
             }
             cursor.close();
         } finally {
             db.close();
         }
+        // reverse the data to show the latest inserted object first
+        Collections.reverse(result);
         return result;
     }
 }

@@ -16,6 +16,9 @@ public class SensorDataObject {
     float u_pressure;
     float u_relative_humidity;
     double u_latitude;
+    double u_longitude;
+    double u_altitude;
+    int u_objectfound;
 
 
     public float getLight() {
@@ -82,6 +85,29 @@ public class SensorDataObject {
         this.u_latitude = latitude;
     }
 
+    public double getLongitude() {
+        return u_longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.u_longitude = longitude;
+    }
+
+    public double getAltitude() {
+        return u_altitude;
+    }
+
+    public void setAltitude(double altitude) {
+        this.u_altitude = altitude;
+    }
+
+    public void setObjectfound(int objectfound){
+        this.u_objectfound = objectfound;
+    }
+
+    public int getObjectfound(){
+        return u_objectfound;
+    }
     @NonNull
     @Override
     public String toString() {
@@ -92,6 +118,9 @@ public class SensorDataObject {
                 +", Ambient Temperature:"+u_ambient_temp
                 +", Pressure:"+u_pressure
                 +", Relative Humidity:"+u_relative_humidity
-                +", Latitude:"+u_latitude;
+                +", Latitude:"+u_latitude
+                +", Longitude:"+u_longitude
+                +", Altitude:"+u_altitude
+                +", Objectfound:"+u_objectfound;
     }
 }

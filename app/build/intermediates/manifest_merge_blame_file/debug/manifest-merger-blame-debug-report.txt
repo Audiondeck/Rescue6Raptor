@@ -59,7 +59,7 @@
 28-->[com.mapbox.mapboxsdk:mapbox-android-telemetry:4.5.1] C:\Users\delfr\.gradle\caches\transforms-2\files-2.1\1236c03e599a977eb184bd8e06930bc8\jetified-mapbox-android-telemetry-4.5.1\AndroidManifest.xml:12:22-65
 29
 30    <application
-30-->C:\Users\delfr\StudioProjects\Rescue6Raptor\app\src\main\AndroidManifest.xml:17:5-35:19
+30-->C:\Users\delfr\StudioProjects\Rescue6Raptor\app\src\main\AndroidManifest.xml:17:5-36:19
 31        android:name="org.tensorflow.lite.examples.classification.MyApplication"
 31-->C:\Users\delfr\StudioProjects\Rescue6Raptor\app\src\main\AndroidManifest.xml:19:9-38
 32        android:allowBackup="true"
@@ -78,72 +78,75 @@
 39        android:testOnly="true"
 40        android:theme="@style/AppTheme" >
 40-->C:\Users\delfr\StudioProjects\Rescue6Raptor\app\src\main\AndroidManifest.xml:24:9-40
-41        <activity android:name="org.tensorflow.lite.examples.classification.auth.AuthenticationActivity" >
-41-->C:\Users\delfr\StudioProjects\Rescue6Raptor\app\src\main\AndroidManifest.xml:25:9-30:20
-41-->C:\Users\delfr\StudioProjects\Rescue6Raptor\app\src\main\AndroidManifest.xml:25:19-62
-42            <intent-filter>
-42-->C:\Users\delfr\StudioProjects\Rescue6Raptor\app\src\main\AndroidManifest.xml:26:13-29:29
-43                <action android:name="android.intent.action.MAIN" />
-43-->C:\Users\delfr\StudioProjects\Rescue6Raptor\app\src\main\AndroidManifest.xml:27:17-69
-43-->C:\Users\delfr\StudioProjects\Rescue6Raptor\app\src\main\AndroidManifest.xml:27:25-66
-44
-45                <category android:name="android.intent.category.LAUNCHER" />
-45-->C:\Users\delfr\StudioProjects\Rescue6Raptor\app\src\main\AndroidManifest.xml:28:17-77
-45-->C:\Users\delfr\StudioProjects\Rescue6Raptor\app\src\main\AndroidManifest.xml:28:27-74
-46            </intent-filter>
-47        </activity>
-48        <activity
-48-->C:\Users\delfr\StudioProjects\Rescue6Raptor\app\src\main\AndroidManifest.xml:31:9-34:51
-49            android:name="org.tensorflow.lite.examples.classification.ClassifierActivity"
-49-->C:\Users\delfr\StudioProjects\Rescue6Raptor\app\src\main\AndroidManifest.xml:32:13-47
-50            android:label="@string/activity_name_classification"
-50-->C:\Users\delfr\StudioProjects\Rescue6Raptor\app\src\main\AndroidManifest.xml:33:13-65
-51            android:screenOrientation="portrait" />
-51-->C:\Users\delfr\StudioProjects\Rescue6Raptor\app\src\main\AndroidManifest.xml:34:13-49
-52        <activity
-52-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\delfr\.gradle\caches\transforms-2\files-2.1\bd8a4935a17dde33dc1d62d4f9914d3b\play-services-base-17.0.0\AndroidManifest.xml:23:9-26:75
-53            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-53-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\delfr\.gradle\caches\transforms-2\files-2.1\bd8a4935a17dde33dc1d62d4f9914d3b\play-services-base-17.0.0\AndroidManifest.xml:24:13-79
-54            android:exported="false"
-54-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\delfr\.gradle\caches\transforms-2\files-2.1\bd8a4935a17dde33dc1d62d4f9914d3b\play-services-base-17.0.0\AndroidManifest.xml:25:13-37
-55            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-55-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\delfr\.gradle\caches\transforms-2\files-2.1\bd8a4935a17dde33dc1d62d4f9914d3b\play-services-base-17.0.0\AndroidManifest.xml:26:13-72
-56
-57        <meta-data
-57-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\delfr\.gradle\caches\transforms-2\files-2.1\991f21673cb666b063ba983e7a065a27\jetified-play-services-basement-17.0.0\AndroidManifest.xml:23:9-25:69
-58            android:name="com.google.android.gms.version"
-58-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\delfr\.gradle\caches\transforms-2\files-2.1\991f21673cb666b063ba983e7a065a27\jetified-play-services-basement-17.0.0\AndroidManifest.xml:24:13-58
-59            android:value="@integer/google_play_services_version" />
-59-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\delfr\.gradle\caches\transforms-2\files-2.1\991f21673cb666b063ba983e7a065a27\jetified-play-services-basement-17.0.0\AndroidManifest.xml:25:13-66
-60
-61        <provider
-61-->[com.mapbox.mapboxsdk:mapbox-android-telemetry:4.5.1] C:\Users\delfr\.gradle\caches\transforms-2\files-2.1\1236c03e599a977eb184bd8e06930bc8\jetified-mapbox-android-telemetry-4.5.1\AndroidManifest.xml:19:9-23:39
-62            android:name="com.mapbox.android.telemetry.provider.MapboxTelemetryInitProvider"
-62-->[com.mapbox.mapboxsdk:mapbox-android-telemetry:4.5.1] C:\Users\delfr\.gradle\caches\transforms-2\files-2.1\1236c03e599a977eb184bd8e06930bc8\jetified-mapbox-android-telemetry-4.5.1\AndroidManifest.xml:20:13-93
-63            android:authorities="org.tensorflow.lite.examples.classification.mapboxtelemetryinitprovider"
-63-->[com.mapbox.mapboxsdk:mapbox-android-telemetry:4.5.1] C:\Users\delfr\.gradle\caches\transforms-2\files-2.1\1236c03e599a977eb184bd8e06930bc8\jetified-mapbox-android-telemetry-4.5.1\AndroidManifest.xml:21:13-79
-64            android:exported="false"
-64-->[com.mapbox.mapboxsdk:mapbox-android-telemetry:4.5.1] C:\Users\delfr\.gradle\caches\transforms-2\files-2.1\1236c03e599a977eb184bd8e06930bc8\jetified-mapbox-android-telemetry-4.5.1\AndroidManifest.xml:22:13-37
-65            android:initOrder="100" />
-65-->[com.mapbox.mapboxsdk:mapbox-android-telemetry:4.5.1] C:\Users\delfr\.gradle\caches\transforms-2\files-2.1\1236c03e599a977eb184bd8e06930bc8\jetified-mapbox-android-telemetry-4.5.1\AndroidManifest.xml:23:13-36
-66
-67        <service
-67-->[com.mapbox.mapboxsdk:mapbox-android-telemetry:4.5.1] C:\Users\delfr\.gradle\caches\transforms-2\files-2.1\1236c03e599a977eb184bd8e06930bc8\jetified-mapbox-android-telemetry-4.5.1\AndroidManifest.xml:25:9-27:72
-68            android:name="com.mapbox.android.telemetry.crash.CrashReporterJobIntentService"
-68-->[com.mapbox.mapboxsdk:mapbox-android-telemetry:4.5.1] C:\Users\delfr\.gradle\caches\transforms-2\files-2.1\1236c03e599a977eb184bd8e06930bc8\jetified-mapbox-android-telemetry-4.5.1\AndroidManifest.xml:26:13-92
-69            android:permission="android.permission.BIND_JOB_SERVICE" />
-69-->[com.mapbox.mapboxsdk:mapbox-android-telemetry:4.5.1] C:\Users\delfr\.gradle\caches\transforms-2\files-2.1\1236c03e599a977eb184bd8e06930bc8\jetified-mapbox-android-telemetry-4.5.1\AndroidManifest.xml:27:13-69
-70
-71        <provider
-71-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\delfr\.gradle\caches\transforms-2\files-2.1\55580b0ab45b69249933074462ab11c2\lifecycle-process-2.1.0\AndroidManifest.xml:23:9-27:43
-72            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
-72-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\delfr\.gradle\caches\transforms-2\files-2.1\55580b0ab45b69249933074462ab11c2\lifecycle-process-2.1.0\AndroidManifest.xml:24:13-79
-73            android:authorities="org.tensorflow.lite.examples.classification.lifecycle-process"
-73-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\delfr\.gradle\caches\transforms-2\files-2.1\55580b0ab45b69249933074462ab11c2\lifecycle-process-2.1.0\AndroidManifest.xml:25:13-69
-74            android:exported="false"
-74-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\delfr\.gradle\caches\transforms-2\files-2.1\55580b0ab45b69249933074462ab11c2\lifecycle-process-2.1.0\AndroidManifest.xml:26:13-37
-75            android:multiprocess="true" />
-75-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\delfr\.gradle\caches\transforms-2\files-2.1\55580b0ab45b69249933074462ab11c2\lifecycle-process-2.1.0\AndroidManifest.xml:27:13-40
-76    </application>
-77
-78</manifest>
+41        <activity
+41-->C:\Users\delfr\StudioProjects\Rescue6Raptor\app\src\main\AndroidManifest.xml:25:9-31:20
+42            android:name="org.tensorflow.lite.examples.classification.auth.AuthenticationActivity"
+42-->C:\Users\delfr\StudioProjects\Rescue6Raptor\app\src\main\AndroidManifest.xml:25:19-62
+43            android:screenOrientation="portrait" >
+43-->C:\Users\delfr\StudioProjects\Rescue6Raptor\app\src\main\AndroidManifest.xml:26:13-49
+44            <intent-filter>
+44-->C:\Users\delfr\StudioProjects\Rescue6Raptor\app\src\main\AndroidManifest.xml:27:13-30:29
+45                <action android:name="android.intent.action.MAIN" />
+45-->C:\Users\delfr\StudioProjects\Rescue6Raptor\app\src\main\AndroidManifest.xml:28:17-69
+45-->C:\Users\delfr\StudioProjects\Rescue6Raptor\app\src\main\AndroidManifest.xml:28:25-66
+46
+47                <category android:name="android.intent.category.LAUNCHER" />
+47-->C:\Users\delfr\StudioProjects\Rescue6Raptor\app\src\main\AndroidManifest.xml:29:17-77
+47-->C:\Users\delfr\StudioProjects\Rescue6Raptor\app\src\main\AndroidManifest.xml:29:27-74
+48            </intent-filter>
+49        </activity>
+50        <activity
+50-->C:\Users\delfr\StudioProjects\Rescue6Raptor\app\src\main\AndroidManifest.xml:32:9-35:51
+51            android:name="org.tensorflow.lite.examples.classification.ClassifierActivity"
+51-->C:\Users\delfr\StudioProjects\Rescue6Raptor\app\src\main\AndroidManifest.xml:33:13-47
+52            android:label="@string/activity_name_classification"
+52-->C:\Users\delfr\StudioProjects\Rescue6Raptor\app\src\main\AndroidManifest.xml:34:13-65
+53            android:screenOrientation="portrait" />
+53-->C:\Users\delfr\StudioProjects\Rescue6Raptor\app\src\main\AndroidManifest.xml:35:13-49
+54        <activity
+54-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\delfr\.gradle\caches\transforms-2\files-2.1\bd8a4935a17dde33dc1d62d4f9914d3b\play-services-base-17.0.0\AndroidManifest.xml:23:9-26:75
+55            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+55-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\delfr\.gradle\caches\transforms-2\files-2.1\bd8a4935a17dde33dc1d62d4f9914d3b\play-services-base-17.0.0\AndroidManifest.xml:24:13-79
+56            android:exported="false"
+56-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\delfr\.gradle\caches\transforms-2\files-2.1\bd8a4935a17dde33dc1d62d4f9914d3b\play-services-base-17.0.0\AndroidManifest.xml:25:13-37
+57            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+57-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\delfr\.gradle\caches\transforms-2\files-2.1\bd8a4935a17dde33dc1d62d4f9914d3b\play-services-base-17.0.0\AndroidManifest.xml:26:13-72
+58
+59        <meta-data
+59-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\delfr\.gradle\caches\transforms-2\files-2.1\991f21673cb666b063ba983e7a065a27\jetified-play-services-basement-17.0.0\AndroidManifest.xml:23:9-25:69
+60            android:name="com.google.android.gms.version"
+60-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\delfr\.gradle\caches\transforms-2\files-2.1\991f21673cb666b063ba983e7a065a27\jetified-play-services-basement-17.0.0\AndroidManifest.xml:24:13-58
+61            android:value="@integer/google_play_services_version" />
+61-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\delfr\.gradle\caches\transforms-2\files-2.1\991f21673cb666b063ba983e7a065a27\jetified-play-services-basement-17.0.0\AndroidManifest.xml:25:13-66
+62
+63        <provider
+63-->[com.mapbox.mapboxsdk:mapbox-android-telemetry:4.5.1] C:\Users\delfr\.gradle\caches\transforms-2\files-2.1\1236c03e599a977eb184bd8e06930bc8\jetified-mapbox-android-telemetry-4.5.1\AndroidManifest.xml:19:9-23:39
+64            android:name="com.mapbox.android.telemetry.provider.MapboxTelemetryInitProvider"
+64-->[com.mapbox.mapboxsdk:mapbox-android-telemetry:4.5.1] C:\Users\delfr\.gradle\caches\transforms-2\files-2.1\1236c03e599a977eb184bd8e06930bc8\jetified-mapbox-android-telemetry-4.5.1\AndroidManifest.xml:20:13-93
+65            android:authorities="org.tensorflow.lite.examples.classification.mapboxtelemetryinitprovider"
+65-->[com.mapbox.mapboxsdk:mapbox-android-telemetry:4.5.1] C:\Users\delfr\.gradle\caches\transforms-2\files-2.1\1236c03e599a977eb184bd8e06930bc8\jetified-mapbox-android-telemetry-4.5.1\AndroidManifest.xml:21:13-79
+66            android:exported="false"
+66-->[com.mapbox.mapboxsdk:mapbox-android-telemetry:4.5.1] C:\Users\delfr\.gradle\caches\transforms-2\files-2.1\1236c03e599a977eb184bd8e06930bc8\jetified-mapbox-android-telemetry-4.5.1\AndroidManifest.xml:22:13-37
+67            android:initOrder="100" />
+67-->[com.mapbox.mapboxsdk:mapbox-android-telemetry:4.5.1] C:\Users\delfr\.gradle\caches\transforms-2\files-2.1\1236c03e599a977eb184bd8e06930bc8\jetified-mapbox-android-telemetry-4.5.1\AndroidManifest.xml:23:13-36
+68
+69        <service
+69-->[com.mapbox.mapboxsdk:mapbox-android-telemetry:4.5.1] C:\Users\delfr\.gradle\caches\transforms-2\files-2.1\1236c03e599a977eb184bd8e06930bc8\jetified-mapbox-android-telemetry-4.5.1\AndroidManifest.xml:25:9-27:72
+70            android:name="com.mapbox.android.telemetry.crash.CrashReporterJobIntentService"
+70-->[com.mapbox.mapboxsdk:mapbox-android-telemetry:4.5.1] C:\Users\delfr\.gradle\caches\transforms-2\files-2.1\1236c03e599a977eb184bd8e06930bc8\jetified-mapbox-android-telemetry-4.5.1\AndroidManifest.xml:26:13-92
+71            android:permission="android.permission.BIND_JOB_SERVICE" />
+71-->[com.mapbox.mapboxsdk:mapbox-android-telemetry:4.5.1] C:\Users\delfr\.gradle\caches\transforms-2\files-2.1\1236c03e599a977eb184bd8e06930bc8\jetified-mapbox-android-telemetry-4.5.1\AndroidManifest.xml:27:13-69
+72
+73        <provider
+73-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\delfr\.gradle\caches\transforms-2\files-2.1\55580b0ab45b69249933074462ab11c2\lifecycle-process-2.1.0\AndroidManifest.xml:23:9-27:43
+74            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
+74-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\delfr\.gradle\caches\transforms-2\files-2.1\55580b0ab45b69249933074462ab11c2\lifecycle-process-2.1.0\AndroidManifest.xml:24:13-79
+75            android:authorities="org.tensorflow.lite.examples.classification.lifecycle-process"
+75-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\delfr\.gradle\caches\transforms-2\files-2.1\55580b0ab45b69249933074462ab11c2\lifecycle-process-2.1.0\AndroidManifest.xml:25:13-69
+76            android:exported="false"
+76-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\delfr\.gradle\caches\transforms-2\files-2.1\55580b0ab45b69249933074462ab11c2\lifecycle-process-2.1.0\AndroidManifest.xml:26:13-37
+77            android:multiprocess="true" />
+77-->[androidx.lifecycle:lifecycle-process:2.1.0] C:\Users\delfr\.gradle\caches\transforms-2\files-2.1\55580b0ab45b69249933074462ab11c2\lifecycle-process-2.1.0\AndroidManifest.xml:27:13-40
+78    </application>
+79
+80</manifest>

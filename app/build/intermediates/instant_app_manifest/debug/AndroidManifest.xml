@@ -39,7 +39,9 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
-        <activity android:name="org.tensorflow.lite.examples.classification.auth.AuthenticationActivity" >
+        <activity
+            android:name="org.tensorflow.lite.examples.classification.auth.AuthenticationActivity"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -222,7 +222,7 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
             }
         };
         missionTimer.start();
-        // send the Mission data to service now and save to sqlite
+        // send the Mission data to service now and save to SQlite
         isMission.postValue(true);
     }
 
@@ -233,4 +233,12 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
         }
     }
 
+    public void objectDetected() {
+        SensorDataObject sdo = sensorDO;
+        sensorDO = new SensorDataObject();
+        sdo.setObjectfound(1);
+
+        // update to service now
+        new AsyncTaskTableTes4(sdo).execute();
+    }
 }

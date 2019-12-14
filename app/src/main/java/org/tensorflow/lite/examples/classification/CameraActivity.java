@@ -539,6 +539,7 @@ public abstract class CameraActivity extends AppCompatActivity
           ((CameraFragment)fragment).onItemDetected(recognition);
         } else if (fragment instanceof HomeFragment){
            // update the object detection
+          ((HomeFragment)fragment).onItemDetected(recognition);
         }
       }
 

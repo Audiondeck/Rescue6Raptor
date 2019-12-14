@@ -1251,6 +1251,7 @@ id adjust_height
 id adjust_width
 id alertTitle
 id all
+id altitude
 id always
 id ambientTemp
 id async
@@ -1372,6 +1373,7 @@ id list_item
 id listview_background_shape
 id location
 id logoView
+id longitude
 id mapView
 id masked
 id media_actions
@@ -1653,6 +1655,7 @@ string acc_format
 string activity_name_classification
 string activity_name_detection
 string activity_name_speech
+string altitude_format
 string ambient_temp_format
 string app_name
 string appbar_scrolling_view_behavior
@@ -1697,6 +1700,7 @@ string item_price
 string item_title
 string latitude_format
 string light_format
+string longitude_format
 string mapbox_access_token
 string mapbox_attributionErrorNoBrowser
 string mapbox_attributionTelemetryMessage

@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import org.tensorflow.lite.examples.classification.model.MissionDataObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MissionTableDbHelper  extends SQLiteOpenHelper {
@@ -66,12 +67,13 @@ public class MissionTableDbHelper  extends SQLiteOpenHelper {
                 mdo.setU_length(cursor.getInt(cursor.getColumnIndex(MissionTable.MissionEntry.COLUMN_NAME_MISSION_Length)));
                 mdo.setU_width(cursor.getInt(cursor.getColumnIndex(MissionTable.MissionEntry.COLUMN_NAME_MISSION_WIDTH)));
                 mResult.add(mdo);
-
             }
             cursor.close();
         } finally {
             mdb.close();
         }
+        // reverse the data to show the latest inserted object first
+        Collections.reverse(mResult);
         return mResult;
     }
 

@@ -18,8 +18,8 @@ public final class SensorReaderContract {
         public static final String COLUMN_NAME_RELATIVE_HUMIDITY = "humidity";
         public static final String COLUMN_NAME_TEMPERATURE = "temperature";
         public static final String COLUMN_NAME_LATITUDE = "latitude";
-        /*public static final String COLUMN_NAME_LONGITUDE = "longitude";
-        public static final String COLUMN_NAME_ALTITUDE = "altitude";  */
+        public static final String COLUMN_NAME_LONGITUDE = "longitude";
+        public static final String COLUMN_NAME_ALTITUDE = "altitude";
 
     }
 
@@ -31,6 +31,8 @@ public final class SensorReaderContract {
                     SensorEntry.COLUMN_NAME_RELATIVE_HUMIDITY + " REAL," +
                     SensorEntry.COLUMN_NAME_TEMPERATURE + " REAL," +
                     SensorEntry.COLUMN_NAME_LATITUDE + " REAL," +
+                    SensorEntry.COLUMN_NAME_LONGITUDE + " REAL," +
+                    SensorEntry.COLUMN_NAME_ALTITUDE + " REAL," +
                     SensorEntry.COLUMN_NAME_ACC_X + " REAL," +
                     SensorEntry.COLUMN_NAME_ACC_Y + " REAL," +
                     SensorEntry.COLUMN_NAME_ACC_Z + " REAL)"
