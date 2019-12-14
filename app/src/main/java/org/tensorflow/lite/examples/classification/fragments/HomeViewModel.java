@@ -209,7 +209,7 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
 
 
     public void onStartMission(int minutes, float mLength, float mWidth, int duration, String roverTeam) {
-        missionTimer = new CountDownTimer(minutes * 30 * 1000, 10 * 1000) {
+        missionTimer = new CountDownTimer(minutes * 60 * 1000, 10 * 1000) {
             //Run Counter to ensure Mission and Rover table only gets hit once
             int run = 0;
 
