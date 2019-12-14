@@ -14,6 +14,7 @@ import com.google.gson.JsonParser;
 import org.json.JSONArray;
 import org.tensorflow.lite.examples.classification.fragments.HomeViewModel;
 import org.tensorflow.lite.examples.classification.model.RoverDataObject;
+import org.tensorflow.lite.examples.classification.rover.RoverParams;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -42,6 +43,7 @@ public class AsyncRover extends AsyncTask<Void, Void, String> {
     String i_team;
 
     private final RoverDataObject roverDataObject;
+    RoverParams rover = new RoverParams();
 
     public AsyncRover(RoverDataObject roverDataObject) {
         this.roverDataObject = roverDataObject;
@@ -49,6 +51,7 @@ public class AsyncRover extends AsyncTask<Void, Void, String> {
 
     @Override
     protected String doInBackground(Void... params) {
+
         try
         {
             URL url = new URL(urlString);
@@ -80,6 +83,8 @@ public class AsyncRover extends AsyncTask<Void, Void, String> {
             con2.disconnect();
 
             i_team = roverDataObject.getRover_Name();
+            rover.setRoverId(roverDataObject.getRover_Name());
+
 
             //covert response to string
             SNGet = response.toString();

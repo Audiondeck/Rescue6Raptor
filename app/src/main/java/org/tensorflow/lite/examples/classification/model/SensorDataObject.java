@@ -19,6 +19,8 @@ public class SensorDataObject {
     double u_longitude;
     double u_altitude;
     boolean u_object_found;
+    float u_compass;
+    String u_compass_direction;
 
     float u_batttery_level;
 
@@ -118,20 +120,55 @@ public class SensorDataObject {
         this.u_object_found = u_object_found;
     }
 
+    public float getU_compass() {
+        return u_compass;
+    }
+
+    public void setU_compass(float u_compass) {
+        this.u_compass = u_compass;
+    }
+
+    public String getU_compass_direction() {
+        return u_compass_direction;
+    }
+
+    public void setU_compass_direction(float compassValue) {
+        String cardinalOrdinalDirection = "Unavailable";
+        float degree = compassValue;
+        if (degree >= 350 || degree <= 10)
+            cardinalOrdinalDirection = "N";
+        if (degree < 350 && degree > 280)
+            cardinalOrdinalDirection = "NW";
+        if (degree <= 280 && degree > 260)
+            cardinalOrdinalDirection = "W";
+        if (degree <= 260 && degree > 190)
+            cardinalOrdinalDirection = "SW";
+        if (degree <= 190 && degree > 170)
+            cardinalOrdinalDirection = "S";
+        if (degree <= 170 && degree > 100)
+            cardinalOrdinalDirection = "SE";
+        if (degree <= 100 && degree > 80)
+            cardinalOrdinalDirection = "E";
+        if (degree <= 80 && degree > 10)
+            cardinalOrdinalDirection = "NE";
+        this.u_compass_direction = cardinalOrdinalDirection;
+    }
+
     @NonNull
     @Override
     public String toString() {
-        return "Light:"+ u_ambient_light
-                +", accX:"+ u_x_cord
-                +", accY:"+ u_y_cord
-                +", accZ:"+u_acc_z
-                +", Ambient Temperature:"+ u_temperature
-                +", Pressure:"+u_pressure
-                +", Relative Humidity:"+ u_humidity
-                +", Latitude:"+u_latitude
-                +", Longitude:"+u_longitude
-                +", Altitude:"+u_altitude
-                +", Objectfound:"+u_object_found
-                +", Battery Level:"+ u_batttery_level;
+        return "Light:" + u_ambient_light
+                + ", accX:" + u_x_cord
+                + ", accY:" + u_y_cord
+                + ", accZ:" + u_acc_z
+                + ", Ambient Temperature:" + u_temperature
+                + ", Pressure:" + u_pressure
+                + ", Relative Humidity:" + u_humidity
+                + ", Latitude:" + u_latitude
+                + ", Longitude:" + u_longitude
+                + ", Altitude:" + u_altitude
+                + ", Objectfound:" + u_object_found
+                + ", Battery Level:" + u_batttery_level
+                +", Compass: "+u_compass;
     }
 }

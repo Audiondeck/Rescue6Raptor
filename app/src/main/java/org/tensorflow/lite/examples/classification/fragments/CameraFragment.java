@@ -19,7 +19,7 @@ public class CameraFragment extends Fragment {
 
     TextView object;
     TextView confidence;
-    View foundView;
+    public View foundView;
 
     @Override
     public View onCreateView(

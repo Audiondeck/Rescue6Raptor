@@ -139,6 +139,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pressure" />
 
+    <TextView
+        android:id="@+id/degreeTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Compass"
+        android:textColor="@android:color/white"
+        app:layout_constraintStart_toStartOf="@+id/relativeHumidity"
+        app:layout_constraintTop_toBottomOf="@+id/relativeHumidity" />
+
 
     <Button
         app:layout_constraintBottom_toBottomOf="parent"

@@ -6,9 +6,13 @@
     <string name="toggle_turn_on">NN:On</string>
     <string name="toggle_turn_off">NN:Off</string>
     <string name="toggle">Use NNAPI</string>
+    <string name="compass_format">Compass: %.0f </string>
     <string name="tflite">tflite</string>
     <string name="nnapi">NNAPI</string>
     <string name="threads">Threads:</string>
+    <string name="scan">Scan</string>
+    <string name="tab_text_5">Arduino</string>
+    <string name="launch_arduino_activity">Launch Arduino Activity</string>
 
     <string name="model">Model:</string>
     <string-array name="models">
@@ -51,6 +55,19 @@
     <string name="fingerprint_not_recognized">Fingerprint not recognized. Try again</string>
     <string name="fingerprint_success">Fingerprint recognized</string>
     <string name="item_title">White Mesh Pluto Backpack</string>
+    <string name="select_device">Select a device</string>
+    <string name="scanning">Scanning for devices...</string>
+    <string name="SystemId">SystemId</string>
+    <string name="ModelNumber">ModelNumber</string>
+    <string name="SerialNumber">SerialNumber</string>
+    <string name="FirmwareRevision">FirmwareRevision</string>
+    <string name="HardwareRevision">HardwareRevision</string>
+    <string name="SoftwareRevision">SoftwareRevision</string>
+    <string name="ManufactureName">ManufactureName</string>
+    <string name="RegCertDataList">RegCertDataList</string>
+    <string name="ManufactureId">    ManufactureId</string>
+    <string name="BatteryLevel">    Battery Level</string>
+    <string name="OrgId">    OrganizationId</string>
     <string name="item_price">$62.68</string>
     <string name="item_description">Mesh backpack in white. Black textile trim throughout.</string>
     <string name="purchase_done">Log In Successful</string>
@@ -60,6 +77,7 @@
     <string name="use_fingerprint_to_authenticate_key">use_fingerprint_to_authenticate_key</string>
     <string name="description_bugdroid_icon">Android bugdroid image</string>
     <string name="description_fingerprint_icon">Fingerprint icon</string>
+    <string name="paired">paired</string>
 
     <string name="cancel">Cancel</string>
     <string name="use_password">Use password</string>
@@ -70,6 +88,9 @@
     <string name="fingerprint_hint">Touch sensor</string>
     <string name="password_description">Enter your store password to continue</string>
     <string name="purchase">Purchase</string>
+    <string name="launch_uart">Launch UART</string>
+    <string name="no_device">&lt;Select a device&gt;</string>
+    <string name="ble_not_supported">Bluetooth Low Energy not supported</string>
     <string name="purchase_not_invalidated">Log In not invalidated</string>
     <string name="purchase_button_not_invalidated_description">
         You can proceed to purchase with this button \n even if a new fingerprint is enrolled

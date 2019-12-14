@@ -31,6 +31,7 @@ import com.google.android.gms.tasks.Task;
 import org.tensorflow.lite.examples.classification.model.MissionDataObject;
 import org.tensorflow.lite.examples.classification.model.RoverDataObject;
 import org.tensorflow.lite.examples.classification.model.SensorDataObject;
+import org.tensorflow.lite.examples.classification.rover.FieldActivity;
 import org.tensorflow.lite.examples.classification.servicenow.AsyncMaster;
 import org.tensorflow.lite.examples.classification.servicenow.AsyncMission;
 import org.tensorflow.lite.examples.classification.servicenow.AsyncRover;
@@ -39,6 +40,7 @@ import org.tensorflow.lite.examples.classification.sqlite.MissionTableDbHelper;
 import org.tensorflow.lite.examples.classification.sqlite.RoverTableDbHelper;
 import org.tensorflow.lite.examples.classification.sqlite.SensorReaderDbHelper;
 
+import java.lang.reflect.Field;
 import java.util.concurrent.ExecutionException;
 
 import static android.content.Context.BATTERY_SERVICE;
@@ -71,6 +73,7 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
     private Sensor pressureSensor;
     private Sensor ambientTempSensor;
     private Sensor relativeHumiditySensor;
+    private Sensor compassSensor;
 
     public HomeViewModel(Application context) {
         super(context);
@@ -140,6 +143,7 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
         pressureSensor = manager.getDefaultSensor(Sensor.TYPE_PRESSURE);
         relativeHumiditySensor = manager.getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY);
         ambientTempSensor = manager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE);
+        compassSensor = manager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
 
         missionDO = new MissionDataObject();
         sensorDO = new SensorDataObject();
@@ -156,6 +160,8 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
         Log.i(HomeViewModel.class.getSimpleName(), "Relative Humidity " + isavailable);
         isavailable = manager.registerListener(this, ambientTempSensor, SensorManager.SENSOR_DELAY_NORMAL);
         Log.i(HomeViewModel.class.getSimpleName(), "Ambient Temperature " + isavailable);
+        isavailable = manager.registerListener(this, compassSensor, SensorManager.SENSOR_DELAY_GAME);
+        Log.i(HomeViewModel.class.getSimpleName(), "Compass "+isavailable);
     }
 
     @Override
@@ -181,6 +187,9 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
             case Sensor.TYPE_RELATIVE_HUMIDITY:
                 sensorDO.setRelativeHumidity(values[0]);
                 break;
+            case Sensor.TYPE_ORIENTATION:
+                sensorDO.setU_compass(values[0]);
+                sensorDO.setU_compass_direction(values[0]);
 
         }
         dataObjectMutableLiveData.postValue(sensorDO);
@@ -198,6 +207,7 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
             manager.unregisterListener(this, pressureSensor);
             manager.unregisterListener(this, ambientTempSensor);
             manager.unregisterListener(this, relativeHumiditySensor);
+            manager.unregisterListener(this, compassSensor);
         }
 
         // TODO stop location updates
@@ -209,7 +219,7 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
 
 
     public void onStartMission(int minutes, float mLength, float mWidth, int duration, String roverTeam) {
-        missionTimer = new CountDownTimer(minutes * 30 * 1000, 10 * 1000) {
+        missionTimer = new CountDownTimer(minutes * 60 * 1000, 10 * 1000) {
             //Run Counter to ensure Mission and Rover table only gets hit once
             int run = 0;
 
@@ -222,7 +232,6 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
                 missionDO.setU_grid_width(mWidth);
                 missionDO.setU_mission_duration(duration);
                 roverDO.setRover_Name(roverTeam);
-
 
 
                 SensorDataObject sdo = sensorDO;

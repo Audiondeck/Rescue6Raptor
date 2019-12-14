@@ -31,6 +31,8 @@ import com.google.android.gms.tasks.Task;
 
 import org.tensorflow.lite.examples.classification.R;
 import org.tensorflow.lite.examples.classification.model.SensorDataObject;
+import org.tensorflow.lite.examples.classification.rover.FieldActivity;
+import org.tensorflow.lite.examples.classification.rover.Swarm;
 import org.tensorflow.lite.examples.classification.tflite.Classifier;
 
 
@@ -46,6 +48,7 @@ public class HomeFragment extends Fragment {
     private TextView ambientTempTV;
     private TextView relativeHumidityTV;
     private TextView latLngTV;
+    TextView degreeTV;
     private Button startMissionButton;
     private FusedLocationProviderClient fusedLocationProviderClient;
 
@@ -64,6 +67,7 @@ public class HomeFragment extends Fragment {
         ambientTempTV = root.findViewById(R.id.ambientTemp);
         relativeHumidityTV = root.findViewById(R.id.relativeHumidity);
         latLngTV = root.findViewById(R.id.lat_lng);
+        degreeTV = root.findViewById(R.id.degreeTV);
 
         homeViewModel.getBattery().observe(this, new Observer<String>() {
             @Override
@@ -95,7 +99,7 @@ public class HomeFragment extends Fragment {
                 pressureTV.setText(getString(R.string.pressure_format, dataObject.getPressure()));
                 ambientTempTV.setText(getString(R.string.ambient_temp_format, dataObject.getAmbient_temp()));
                 relativeHumidityTV.setText(getString(R.string.relative_humidity_format, dataObject.getRelativeHumidity()));
-
+                degreeTV.setText(getString(R.string.compass_format, dataObject.getU_compass()) + dataObject.getU_compass_direction());
                 if(mLocation!=null) {
                     homeViewModel.sensorDO.setLatitude(mLocation.getLatitude());
                     homeViewModel.sensorDO.setLongitude(mLocation.getLongitude());
@@ -119,7 +123,12 @@ public class HomeFragment extends Fragment {
         startMissionButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                FieldActivity fieldActivity = new FieldActivity();
+                Swarm swarm = new Swarm();
                 mListener.onStartMissionButtonPressed();
+                fieldActivity.calculateFieldParams(mWidth, mLength);
+                fieldActivity.createGrid();
+                swarm.startSwarm();
             }
         });
 
