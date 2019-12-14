@@ -197,15 +197,17 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
 
         // TODO stop location updates
     }
+    //Holds the return Result from AsyncTasks
+    String aResult = "";
+    String mResult = "";
+
+
 
     public void onStartMission(int minutes, float mLength, float mWidth, int duration, String roverID) {
         missionTimer = new CountDownTimer(minutes * 60 * 1000, 30 * 1000) {
             //Run Counter to ensure Mission and Rover table only gets hit once
             int run = 0;
 
-            //Holds the return Result from AsyncTasks
-            String aResult = "";
-            String mResult = "";
             @Override
             public void onTick(long l) {
                 // will be called every interval
@@ -216,12 +218,20 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
                 missionDO.setU_mission_duration(duration);
                 roverDO.setU_roverID(roverID);
 
+
+
                 SensorDataObject sdo = sensorDO;
                 sensorDO = new SensorDataObject();
                 MissionDataObject mdo = missionDO;
                 missionDO = new MissionDataObject();
                 RoverDataObject rdo = roverDO;
                 roverDO = new RoverDataObject();
+
+                missionDO.setU_grid_length(mLength);
+                missionDO.setU_grid_width(mWidth);
+                missionDO.setU_mission_duration(duration);
+                roverDO.setU_roverID(roverID);
+
 
                 //Insert Sensor data to SQL
                 dbHelper.insertSensorData(sdo);
@@ -284,7 +294,6 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
                 }
             }
 
-
             @Override
             public void onFinish() {
                 // send the soccer ball found/not status
@@ -305,27 +314,37 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
     }
 
     public void objectDetected() {
-/*        SensorDataObject sdo = sensorDO;
-        sensorDO = new SensorDataObject();
-        sdo.setObjectfound(1);
 
-        // update to service now
-        new AsyncTaskTableTes4(sdo).execute();*/
-
-
-        //TODO: Updated Version Needs Testing
 
         SensorDataObject sdo = sensorDO;
-        sensorDO = new SensorDataObject();
         MissionDataObject mdo = missionDO;
-        missionDO = new MissionDataObject();
         RoverDataObject rdo = roverDO;
-        roverDO = new RoverDataObject();
+
+        rdo.setRover_Name(aResult);
+        mdo.setU_mission_id(mResult);
+        float mLength = missionDO.getU_grid_length();
+        float mWidth = missionDO.getU_grid_width();
+        int duration = missionDO.getU_mission_duration();
+        String roverID = roverDO.getU_roverID();
 
 
-        sdo.setObjectfound(1);
+        missionDO.setU_grid_length(mLength);
+        missionDO.setU_grid_width(mWidth);
+        missionDO.setU_mission_duration(duration);
+        roverDO.setU_roverID(roverID);
+
+
+        //Inserts data into SQLite Tables
+        rdbHelper.insertRoverData(rdo);
+        mdbHelper.insertMissionData(mdo);
+        dbHelper.insertSensorData(sdo);
+
+
+
+        sdo.setU_object_found(true);
 
         new AsyncMaster(sdo,rdo,mdo).execute();
+
 
     }
 }

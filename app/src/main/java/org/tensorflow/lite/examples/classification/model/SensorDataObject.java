@@ -18,7 +18,7 @@ public class SensorDataObject {
     double u_latitude;
     double u_longitude;
     double u_altitude;
-    int u_objectfound;
+    boolean u_object_found;
 
 
     public float getLight() {
@@ -101,13 +101,14 @@ public class SensorDataObject {
         this.u_altitude = altitude;
     }
 
-    public void setObjectfound(int objectfound){
-        this.u_objectfound = objectfound;
+    public boolean isU_object_found() {
+        return u_object_found;
     }
 
-    public int getObjectfound(){
-        return u_objectfound;
+    public void setU_object_found(boolean u_object_found) {
+        this.u_object_found = u_object_found;
     }
+
     @NonNull
     @Override
     public String toString() {
@@ -121,6 +122,6 @@ public class SensorDataObject {
                 +", Latitude:"+u_latitude
                 +", Longitude:"+u_longitude
                 +", Altitude:"+u_altitude
-                +", Objectfound:"+u_objectfound;
+                +", Objectfound:"+u_object_found;
     }
 }
