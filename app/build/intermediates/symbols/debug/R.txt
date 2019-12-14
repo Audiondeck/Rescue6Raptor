@@ -1347,7 +1347,7 @@ int id ifRoom 0x7f09007f
 int id image 0x7f090080
 int id in_duration 0x7f090081
 int id in_length 0x7f090082
-int id in_roverID 0x7f090083
+int id in_roverTeam 0x7f090083
 int id in_width 0x7f090084
 int id inference 0x7f090085
 int id inference_info 0x7f090086
