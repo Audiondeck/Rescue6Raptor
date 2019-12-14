@@ -45,6 +45,7 @@ public class MissionTableDbHelper  extends SQLiteOpenHelper {
         values.put(MissionTable.MissionEntry.COLUMN_NAME_MISSION_Length, data.getU_grid_length());
         values.put(MissionTable.MissionEntry.COLUMN_NAME_MISSION_WIDTH, data.getU_grid_width());
         values.put(MissionTable.MissionEntry.COLUMN_NAME_MISSION_ID, data.getU_mission_id());
+        //values.put(MissionTable.MissionEntry.COLUMN_NAME_START_TIME, data.);
 
 
         SQLiteDatabase mdb = getWritableDatabase();

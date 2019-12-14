@@ -9,12 +9,12 @@ public class SensorDataObject {
 
     // match with service now column names
     float u_ambient_light;
-    float u_acc_x;
-    float u_acc_y;
+    float u_x_cord;
+    float u_y_cord;
     float u_acc_z;
-    float u_ambient_temp;
+    float u_temperature;
     float u_pressure;
-    float u_relative_humidity;
+    float u_humidity;
     double u_latitude;
     double u_longitude;
     double u_altitude;
@@ -30,19 +30,19 @@ public class SensorDataObject {
     }
 
     public float getAccx() {
-        return u_acc_x;
+        return u_x_cord;
     }
 
     public void setAccx(float accx) {
-        this.u_acc_x = accx;
+        this.u_x_cord = accx;
     }
 
     public float getAccy() {
-        return u_acc_y;
+        return u_y_cord;
     }
 
     public void setAccy(float accy) {
-        this.u_acc_y = accy;
+        this.u_y_cord = accy;
     }
 
     public float getAccz() {
@@ -54,11 +54,11 @@ public class SensorDataObject {
     }
 
     public float getAmbient_temp() {
-        return u_ambient_temp;
+        return u_temperature;
     }
 
     public void setAmbient_temp(float ambient_temp) {
-        this.u_ambient_temp = ambient_temp;
+        this.u_temperature = ambient_temp;
     }
 
     public void setPressure(float pressure) {
@@ -70,11 +70,11 @@ public class SensorDataObject {
     }
 
     public void setRelativeHumidity(float relative_humidity) {
-        this.u_relative_humidity = relative_humidity;
+        this.u_humidity = relative_humidity;
     }
 
     public float getRelativeHumidity() {
-        return u_relative_humidity;
+        return u_humidity;
     }
 
     public double getLatitude() {
@@ -113,12 +113,12 @@ public class SensorDataObject {
     @Override
     public String toString() {
         return "Light:"+ u_ambient_light
-                +", accX:"+u_acc_x
-                +", accY:"+u_acc_y
+                +", accX:"+ u_x_cord
+                +", accY:"+ u_y_cord
                 +", accZ:"+u_acc_z
-                +", Ambient Temperature:"+u_ambient_temp
+                +", Ambient Temperature:"+ u_temperature
                 +", Pressure:"+u_pressure
-                +", Relative Humidity:"+u_relative_humidity
+                +", Relative Humidity:"+ u_humidity
                 +", Latitude:"+u_latitude
                 +", Longitude:"+u_longitude
                 +", Altitude:"+u_altitude
