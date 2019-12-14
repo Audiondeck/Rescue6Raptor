@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.tensorflow.lite.examples.classification.R;
 import org.tensorflow.lite.examples.classification.model.MissionDataObject;
+import org.tensorflow.lite.examples.classification.model.RoverDataObject;
 import org.tensorflow.lite.examples.classification.model.SensorDataObject;
 
 import java.util.List;
@@ -20,14 +21,14 @@ public class SensorDataAdapter extends RecyclerView.Adapter<SensorDataAdapter.My
     Context cxt;
     List<SensorDataObject> list;
     List<MissionDataObject> mlist;
+    List<RoverDataObject> rlist;
 
 
-
-    public SensorDataAdapter(Context context, List<SensorDataObject> list, List<MissionDataObject> mlist){
+    public SensorDataAdapter(Context context, List<SensorDataObject> list, List<MissionDataObject> mlist, List<RoverDataObject> rlist){
         this.list = list;
         this.cxt = context;
         this.mlist = mlist;
-
+        this.rlist = rlist;
     }
 
     @NonNull
@@ -52,9 +53,15 @@ public class SensorDataAdapter extends RecyclerView.Adapter<SensorDataAdapter.My
         holder.altitudeTV.setText (cxt.getString(R.string.altitude_format, sdo.getAltitude()));
 
         MissionDataObject mdo = mlist.get(position);
-        holder.widthTV.setText(cxt.getString(R.string.mission_width_format, mdo.getU_width()));
-        holder.lengthTV.setText(cxt.getString(R.string.mission_length_format,mdo.getU_length()));
-        holder.durationTV.setText(cxt.getString(R.string.mission_duration_format,mdo.getU_duration()));
+        holder.widthTV.setText(cxt.getString(R.string.mission_width_format, mdo.getU_grid_width()));
+        holder.lengthTV.setText(cxt.getString(R.string.mission_length_format,mdo.getU_grid_length()));
+        holder.durationTV.setText(cxt.getString(R.string.mission_duration_format,mdo.getU_mission_duration()));
+        holder.mIDTV.setText(cxt.getString(R.string.missionID_format,mdo.getU_mission_id()));
+
+
+        RoverDataObject roverDataObject = rlist.get(position);
+        holder.roverNameTV.setText(cxt.getString(R.string.rover_Name_format,roverDataObject.getRover_Name()));
+        holder.roverIDTV.setText(cxt.getString(R.string.roverID_format,roverDataObject.getU_roverID()));
     }
 
     @Override
@@ -76,6 +83,10 @@ public class SensorDataAdapter extends RecyclerView.Adapter<SensorDataAdapter.My
         TextView widthTV;
         TextView lengthTV;
         TextView durationTV;
+        TextView mIDTV;
+
+        TextView roverNameTV;
+        TextView roverIDTV;
 
 
        public MyViewHolder(@NonNull View itemView) {
@@ -92,6 +103,10 @@ public class SensorDataAdapter extends RecyclerView.Adapter<SensorDataAdapter.My
            widthTV = itemView.findViewById(R.id.width);
            lengthTV = itemView.findViewById(R.id.length);
            durationTV = itemView.findViewById(R.id.duration);
+           mIDTV = itemView.findViewById(R.id.Mission_ID);
+
+           roverIDTV = itemView.findViewById(R.id.rover_id);
+           roverNameTV = itemView.findViewById(R.id.rover_name);
 
 
        }

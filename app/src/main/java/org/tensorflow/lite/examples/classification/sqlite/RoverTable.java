@@ -13,8 +13,8 @@ public final class RoverTable {
     }
 
     static final String SQL_CREATE_ENTRIES = "CREATE TABLE " + RoverEntry.TABLE_NAME +" ("+
-    RoverEntry.COLUMN_ROVER_ID +" REAL," +
-    RoverEntry.COLUMN_ROVER_NAME +" REAL)";
+            RoverEntry.COLUMN_ROVER_ID +" REAL," +
+            RoverEntry.COLUMN_ROVER_NAME +" REAL)";
 
     static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + RoverEntry.TABLE_NAME;

@@ -16,6 +16,11 @@
         android:layout_height="wrap_content"/>
     <TextView
         style="@style/TextAppearance.AppCompat.Large"
+        android:id="@+id/Mission_ID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        style="@style/TextAppearance.AppCompat.Large"
         android:id="@+id/acc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

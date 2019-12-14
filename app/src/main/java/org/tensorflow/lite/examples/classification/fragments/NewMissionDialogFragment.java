@@ -28,6 +28,9 @@ public class NewMissionDialogFragment extends DialogFragment implements View.OnC
 
     private EditText durationTV;
     private int duration;
+    private String roverID;
+
+    private EditText etRoverID;
 
     private EditText etWidth;
     private EditText etLength;
@@ -62,6 +65,8 @@ public class NewMissionDialogFragment extends DialogFragment implements View.OnC
 
         etWidth = view.findViewById(R.id.in_width);
         etLength = view.findViewById(R.id.in_length);
+        etRoverID = view.findViewById(R.id.in_roverID);
+
 
         mViewModel = ViewModelProviders.of(this).get(NewMissionViewModel.class);
 
@@ -101,9 +106,11 @@ public class NewMissionDialogFragment extends DialogFragment implements View.OnC
 
         mWidth = Float.parseFloat(etWidth.getText().toString());
 
+        roverID = etRoverID.getText().toString();
+
         mViewModel.setmDuration(duration);
         if (mListener != null) {
-            mListener.onStartMission(mViewModel.getmDuration(), mLength, mWidth, duration);
+            mListener.onStartMission(mViewModel.getmDuration(), mLength, mWidth, duration, roverID);
         }
 
 
@@ -112,6 +119,6 @@ public class NewMissionDialogFragment extends DialogFragment implements View.OnC
 
 
     public interface OnFragmentInteractionListener {
-        void onStartMission(int minutes, float mLength, float mWidth, int duration);
+        void onStartMission(int minutes, float mLength, float mWidth, int duration, String roverID);
     }
 }

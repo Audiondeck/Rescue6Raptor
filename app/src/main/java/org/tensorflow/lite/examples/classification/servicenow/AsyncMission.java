@@ -3,11 +3,10 @@ package org.tensorflow.lite.examples.classification.servicenow;
 import android.os.AsyncTask;
 import android.util.Log;
 
-
 import com.google.gson.Gson;
 
+import org.json.JSONObject;
 import org.tensorflow.lite.examples.classification.model.MissionDataObject;
-import org.tensorflow.lite.examples.classification.model.SensorDataObject;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -20,13 +19,16 @@ import java.net.URL;
 public class AsyncMission extends AsyncTask<Void, Void, String> {
 
     private final String USER_AGENT = "Mozilla/5.0";
-    private final String user = "rip4@psu.edu";
-    private final String pwd = "TensorTc$mry2017";
+    private final String user = "dqt5211@psu.edu";
+    private final String pwd = "Abington1";
 
-    private final String urlString = "https://emplkasperpsu1.service-now.com/api/now/table/u_datasensor6";
+    private final String urlString = "https://emplkasperpsu1.service-now.com/api/now/table/u_mission_table";
 
     private final MissionDataObject missionDataObject;
 
+    String Respnse;
+
+    String u_number;
     public AsyncMission(MissionDataObject missionDataObject){
 
         this.missionDataObject = missionDataObject;
@@ -79,11 +81,24 @@ public class AsyncMission extends AsyncTask<Void, Void, String> {
             //printing result from response
             System.out.println(response.toString());
 
+            Respnse = response.toString();
+
+            //Converts SNGet to JSON from String
+            Object json = new JSONObject(Respnse).getJSONObject("result").get("u_number");
+
+            u_number = json.toString();
+
         } catch (Exception e) {
             Log.e(AsyncMission.class.getSimpleName(), e.getMessage(), e);
         }
 
-        return null;
+        return u_number;
+    }
+
+    @Override
+    protected void  onPostExecute(String Result){
+        super.onPostExecute(Result);
+
     }
 
 }

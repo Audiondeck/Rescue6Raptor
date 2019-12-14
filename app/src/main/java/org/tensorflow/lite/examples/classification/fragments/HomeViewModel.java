@@ -29,11 +29,17 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
 import org.tensorflow.lite.examples.classification.model.MissionDataObject;
+import org.tensorflow.lite.examples.classification.model.RoverDataObject;
 import org.tensorflow.lite.examples.classification.model.SensorDataObject;
+import org.tensorflow.lite.examples.classification.servicenow.AsyncMaster;
 import org.tensorflow.lite.examples.classification.servicenow.AsyncMission;
+import org.tensorflow.lite.examples.classification.servicenow.AsyncRover;
 import org.tensorflow.lite.examples.classification.servicenow.AsyncTaskTableTes4;
 import org.tensorflow.lite.examples.classification.sqlite.MissionTableDbHelper;
+import org.tensorflow.lite.examples.classification.sqlite.RoverTableDbHelper;
 import org.tensorflow.lite.examples.classification.sqlite.SensorReaderDbHelper;
+
+import java.util.concurrent.ExecutionException;
 
 import static android.content.Context.BATTERY_SERVICE;
 
@@ -52,6 +58,10 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
     private MissionDataObject missionDO;
     private SensorReaderDbHelper dbHelper;
     private MissionTableDbHelper mdbHelper;
+
+    private RoverDataObject roverDO;
+    private RoverTableDbHelper rdbHelper;
+
 
     // capture sensor details when there is an active mission
     private SensorManager manager;
@@ -73,6 +83,9 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
 
         mdbHelper = new MissionTableDbHelper(context);
         dbHelper = new SensorReaderDbHelper(context);
+
+        rdbHelper = new RoverTableDbHelper(context);
+
 
         BatteryManager bm = (BatteryManager) context.getSystemService(BATTERY_SERVICE);
 
@@ -127,6 +140,8 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
 
         missionDO = new MissionDataObject();
         sensorDO = new SensorDataObject();
+        roverDO = new RoverDataObject();
+
 
         boolean isavailable = manager.registerListener(this, accSensor, SensorManager.SENSOR_DELAY_NORMAL);
         Log.i(HomeViewModel.class.getSimpleName(), "Accelerometer " + isavailable);
@@ -183,36 +198,92 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
         // TODO stop location updates
     }
 
-    public void onStartMission(int minutes, float mLength, float mWidth, int duration) {
+    public void onStartMission(int minutes, float mLength, float mWidth, int duration, String roverID) {
         missionTimer = new CountDownTimer(minutes * 60 * 1000, 30 * 1000) {
+            //Run Counter to ensure Mission and Rover table only gets hit once
+            int run = 0;
 
+            //Holds the return Result from AsyncTasks
+            String aResult = "";
+            String mResult = "";
             @Override
             public void onTick(long l) {
                 // will be called every interval
                 // save to SQLite
 
-                missionDO.setU_length(mLength);
-                missionDO.setU_width(mWidth);
-                missionDO.setU_duration(duration);
-
-                MissionDataObject mdo = missionDO;
-                missionDO = new MissionDataObject();
+                missionDO.setU_grid_length(mLength);
+                missionDO.setU_grid_width(mWidth);
+                missionDO.setU_mission_duration(duration);
+                roverDO.setU_roverID(roverID);
 
                 SensorDataObject sdo = sensorDO;
                 sensorDO = new SensorDataObject();
+                MissionDataObject mdo = missionDO;
+                missionDO = new MissionDataObject();
+                RoverDataObject rdo = roverDO;
+                roverDO = new RoverDataObject();
 
-                mdbHelper.insertMissionData(mdo);
+                //Insert Sensor data to SQL
+                dbHelper.insertSensorData(sdo);
 
-                long id = dbHelper.insertSensorData(sdo);
 
-                Log.i(HomeViewModel.class.getSimpleName(), "Save sensor data " + sdo.toString());
+                if(run == 0){
 
-                Log.i(HomeViewModel.class.getSimpleName(), "Mission Data" + mdo.toString());
+                    //Starts Async Rover and Async Mission
+                    //And Returns the Results
+                    try {
+                        AsyncRover ASRT = new AsyncRover(rdo);
+                        ASRT.execute();
+                        aResult = ASRT.get();
 
-                // send to service now
-                new AsyncTaskTableTes4(sdo).execute();
-                new AsyncMission(mdo).execute();
+                        AsyncMission AsyM = new AsyncMission(mdo);
+                        AsyM.execute();
+                        mResult = AsyM.get();
+
+
+                    } catch (ExecutionException | InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    //Sets Rover Name to Rover Data Object
+                    rdo.setRover_Name(aResult);
+                    mdo.setU_mission_id(mResult);
+
+
+                    //Inserts data into SQLite Tables
+                    rdbHelper.insertRoverData(rdo);
+                    mdbHelper.insertMissionData(mdo);
+
+                    Log.i(HomeViewModel.class.getSimpleName(), "Save sensor data " + sdo.toString());
+
+                    Log.i(HomeViewModel.class.getSimpleName(), "Mission Data " + mdo.toString());
+                    Log.i(HomeViewModel.class.getSimpleName(), "Rover Data " + rdo.toString());
+
+                    new AsyncMaster(sdo, rdo, mdo).execute();
+
+                    run =1;
+                }
+                else {
+                    Log.i(HomeViewModel.class.getSimpleName(), "Mission Data " + mdo.toString());
+                    Log.i(HomeViewModel.class.getSimpleName(), "Rover Data " + rdo.toString());
+                    Log.i(HomeViewModel.class.getSimpleName(), "Save sensor data " + sdo.toString());
+
+
+                    //Sets Rover Name to Rover Data Object
+                    rdo.setRover_Name(aResult);
+                    mdo.setU_mission_id(mResult);
+
+
+
+                    //Inserts data into SQLite Tables
+                    rdbHelper.insertRoverData(rdo);
+                    mdbHelper.insertMissionData(mdo);
+
+
+                    // send to service now
+                    new AsyncMaster(sdo, rdo, mdo).execute();
+                }
             }
+
 
             @Override
             public void onFinish() {
@@ -234,11 +305,27 @@ public class HomeViewModel extends AndroidViewModel implements SensorEventListen
     }
 
     public void objectDetected() {
-        SensorDataObject sdo = sensorDO;
+/*        SensorDataObject sdo = sensorDO;
         sensorDO = new SensorDataObject();
         sdo.setObjectfound(1);
 
         // update to service now
-        new AsyncTaskTableTes4(sdo).execute();
+        new AsyncTaskTableTes4(sdo).execute();*/
+
+
+        //TODO: Updated Version Needs Testing
+
+        SensorDataObject sdo = sensorDO;
+        sensorDO = new SensorDataObject();
+        MissionDataObject mdo = missionDO;
+        missionDO = new MissionDataObject();
+        RoverDataObject rdo = roverDO;
+        roverDO = new RoverDataObject();
+
+
+        sdo.setObjectfound(1);
+
+        new AsyncMaster(sdo,rdo,mdo).execute();
+
     }
 }

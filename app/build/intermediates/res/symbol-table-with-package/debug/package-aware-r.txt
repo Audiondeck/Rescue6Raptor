@@ -1221,6 +1221,7 @@ id ALT
 id CTRL
 id FUNCTION
 id META
+id Mission_ID
 id SHIFT
 id SYM
 id acc
@@ -1347,6 +1348,7 @@ id ifRoom
 id image
 id in_duration
 id in_length
+id in_roverID
 id in_width
 id inference
 id inference_info
@@ -1359,6 +1361,7 @@ id item_touch_helper_previous_elevation
 id label
 id label2
 id label3
+id label4
 id labeled
 id largeLabel
 id lat_lng
@@ -1725,6 +1728,7 @@ string mapbox_style_traffic_night
 string mapbox_telemetryImproveMap
 string mapbox_telemetryLink
 string mapbox_telemetrySettings
+string missionID_format
 string mission_duration
 string mission_duration_format
 string mission_length_format
@@ -1748,6 +1752,8 @@ string purchase_done
 string purchase_not_invalidated
 string relative_humidity_format
 string request_permission
+string roverID_format
+string rover_Name_format
 string search_menu_title
 string sign_in
 string status_bar_notification_info_overflow

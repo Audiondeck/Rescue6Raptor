@@ -9,7 +9,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import org.tensorflow.lite.examples.classification.model.MissionDataObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class MissionTableDbHelper  extends SQLiteOpenHelper {
@@ -42,10 +41,11 @@ public class MissionTableDbHelper  extends SQLiteOpenHelper {
     public long insertMissionData(MissionDataObject data) {
 
         ContentValues values = new ContentValues();
-        values.put(MissionTable.MissionEntry.COLUMN_NAME_MISSION_DURATION, data.getU_duration());
-       //Not Implemented yet
-        values.put(MissionTable.MissionEntry.COLUMN_NAME_MISSION_Length, data.getU_length());
-        values.put(MissionTable.MissionEntry.COLUMN_NAME_MISSION_WIDTH, data.getU_width());
+        values.put(MissionTable.MissionEntry.COLUMN_NAME_MISSION_DURATION, data.getU_mission_duration());
+        values.put(MissionTable.MissionEntry.COLUMN_NAME_MISSION_Length, data.getU_grid_length());
+        values.put(MissionTable.MissionEntry.COLUMN_NAME_MISSION_WIDTH, data.getU_grid_width());
+        values.put(MissionTable.MissionEntry.COLUMN_NAME_MISSION_ID, data.getU_mission_id());
+
 
         SQLiteDatabase mdb = getWritableDatabase();
         try{
@@ -63,17 +63,17 @@ public class MissionTableDbHelper  extends SQLiteOpenHelper {
             Cursor cursor = mdb.query(MissionTable.MissionEntry.TABLE_NAME, null, null, null, null, null, null);
             while (cursor.moveToNext()) {
                 MissionDataObject mdo = new MissionDataObject();
-                mdo.setU_duration(cursor.getInt(cursor.getColumnIndex(MissionTable.MissionEntry.COLUMN_NAME_MISSION_DURATION)));
-                mdo.setU_length(cursor.getInt(cursor.getColumnIndex(MissionTable.MissionEntry.COLUMN_NAME_MISSION_Length)));
-                mdo.setU_width(cursor.getInt(cursor.getColumnIndex(MissionTable.MissionEntry.COLUMN_NAME_MISSION_WIDTH)));
+                mdo.setU_mission_duration(cursor.getInt(cursor.getColumnIndex(MissionTable.MissionEntry.COLUMN_NAME_MISSION_DURATION)));
+                mdo.setU_grid_length(cursor.getInt(cursor.getColumnIndex(MissionTable.MissionEntry.COLUMN_NAME_MISSION_Length)));
+                mdo.setU_grid_width(cursor.getInt(cursor.getColumnIndex(MissionTable.MissionEntry.COLUMN_NAME_MISSION_WIDTH)));
+                mdo.setU_mission_id(cursor.getString(cursor.getColumnIndex(MissionTable.MissionEntry.COLUMN_NAME_MISSION_ID)));
                 mResult.add(mdo);
+
             }
             cursor.close();
         } finally {
             mdb.close();
         }
-        // reverse the data to show the latest inserted object first
-        Collections.reverse(mResult);
         return mResult;
     }
 

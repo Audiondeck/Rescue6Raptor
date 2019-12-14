@@ -42,7 +42,11 @@
     <string name="mission_width_format">Mission Width : %1$f</string>
     <string name="mission_length_format">Mission Length : %1$f</string>
     <string name="mission_duration_format">Mission Duration : %1$d</string>
+    <string name="missionID_format">Mission ID : %1$S</string>
 
+
+    <string name="roverID_format">Rover ID : %1$S</string>
+    <string name="rover_Name_format">Rover Name: %1$S</string>
 
     <string name="fingerprint_not_recognized">Fingerprint not recognized. Try again</string>
     <string name="fingerprint_success">Fingerprint recognized</string>

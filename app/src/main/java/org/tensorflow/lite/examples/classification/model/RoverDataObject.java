@@ -5,23 +5,29 @@ import androidx.annotation.NonNull;
 
 public class RoverDataObject {
     //Sets rover id
-    int rover_id = 1;
 
-    String rover_Name = "Team 4";
+    String u_rover_Name ="";
+    String u_rover_id;
 
-    public int getRover_id(){return rover_id;}
 
-    public void setRover_id(int rover_id){this.rover_id = rover_id;}
+    public void setU_roverID(String u_roverID){ this.u_rover_id = u_roverID;}
 
-    public String getRover_Name(){return rover_Name;}
+    public String getU_roverID(){return u_rover_id;}
+
+    public String getRover_Name(){return u_rover_Name;}
+
+    public void setRover_Name(String u_roverName){
+        this.u_rover_Name = u_roverName;
+    }
+
 
 
     //Name matches with ServiceNow
     @NonNull
     @Override
     public String toString() {
-        return "Rover ID:"+rover_id
-                + ", Name:" + rover_Name;
+        return "Rover ID:"+u_rover_id
+                + ", Name:" + u_rover_Name;
 
     }
 

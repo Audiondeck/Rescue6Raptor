@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\delfr\\StudioProjects\\Rescue6Raptor\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-he\\values-he.xml",
+            "outputFile": "F:\\AndroidStudioProjects\\IST 440 Project\\Rescue6RaptorError\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-he\\values-he.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\delfr\\.gradle\\caches\\transforms-2\\files-2.1\\a80ba367f0e4065d50da72d9f2a19f05\\jetified-mapbox-android-sdk-8.4.0\\res\\values-he\\values-he.xml",
+                    "source": "C:\\Users\\dennn\\.gradle\\caches\\transforms-2\\files-2.1\\1217be0e6b9f8c5720ebbfc47ce3f770\\jetified-mapbox-android-sdk-8.4.0\\res\\values-he\\values-he.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",

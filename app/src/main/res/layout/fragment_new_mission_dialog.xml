@@ -9,14 +9,15 @@
     >
 
 
-    <Button
-        android:id="@+id/start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="192dp"
-        android:text="START"
+    <TextView
+        android:id="@+id/label4"
+        style="@style/TextAppearance.AppCompat.Large"
+        android:layout_width="185dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="28dp"
+        android:text="Set Rover ID:"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.854"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,9 +26,33 @@
         style="@style/TextAppearance.AppCompat.Large"
         android:layout_width="185dp"
         android:layout_height="46dp"
+        android:layout_marginTop="100dp"
         android:text="@string/mission_duration"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/in_roverID"
+        android:layout_width="183dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="20dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/in_duration"
+        app:layout_constraintStart_toEndOf="@+id/label4"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.6" />
+
+    <Button
+        android:id="@+id/start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="280dp"
+        android:text="START"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.708"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,20 +61,8 @@
         style="@style/TextAppearance.AppCompat.Large"
         android:layout_width="214dp"
         android:layout_height="46dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="164dp"
         android:text="Search Width (feet):"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/label3"
-        style="@style/TextAppearance.AppCompat.Large"
-        android:layout_width="214dp"
-        android:layout_height="46dp"
-        android:layout_marginTop="120dp"
-        android:text="Search Length (feet):"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,10 +72,11 @@
         android:id="@+id/in_duration"
         android:layout_width="122dp"
         android:layout_height="45dp"
+        android:layout_marginTop="96dp"
         android:ems="10"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.556"
+        app:layout_constraintHorizontal_bias="0.694"
         app:layout_constraintStart_toEndOf="@+id/label2"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -70,23 +84,35 @@
         android:id="@+id/in_width"
         android:layout_width="122dp"
         android:layout_height="45dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="168dp"
         android:ems="10"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.67"
+        app:layout_constraintHorizontal_bias="0.682"
         app:layout_constraintStart_toEndOf="@+id/label2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/label3"
+        style="@style/TextAppearance.AppCompat.Large"
+        android:layout_width="214dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="224dp"
+        android:text="Search Length (feet):"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/in_length"
         android:layout_width="122dp"
         android:layout_height="45dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="224dp"
         android:ems="10"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.67"
+        app:layout_constraintHorizontal_bias="0.694"
         app:layout_constraintStart_toEndOf="@+id/label2"
         app:layout_constraintTop_toTopOf="parent" />
 

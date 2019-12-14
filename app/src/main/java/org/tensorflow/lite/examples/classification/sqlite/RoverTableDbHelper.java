@@ -14,7 +14,7 @@ import java.util.List;
 
 public class RoverTableDbHelper extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME= "RoverTable.db";
+    public static final String DATABASE_NAME= "RoverTabe.db";
 
     public RoverTableDbHelper(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -34,7 +34,7 @@ public class RoverTableDbHelper extends SQLiteOpenHelper {
 
     public long insertRoverData(RoverDataObject data){
         ContentValues values = new ContentValues();
-        values.put(RoverTable.RoverEntry.COLUMN_ROVER_ID, data.getRover_id());
+        values.put(RoverTable.RoverEntry.COLUMN_ROVER_ID, data.getU_roverID());
         values.put(RoverTable.RoverEntry.COLUMN_ROVER_NAME, data.getRover_Name());
 
         SQLiteDatabase rdb = getWritableDatabase();
@@ -54,7 +54,8 @@ public class RoverTableDbHelper extends SQLiteOpenHelper {
             Cursor cursor = rdb.query(RoverTable.RoverEntry.TABLE_NAME,null,null,null,null,null,null);
             while (cursor.moveToNext()){
                 RoverDataObject rdo = new RoverDataObject();
-                rdo.setRover_id(cursor.getInt(cursor.getColumnIndex(RoverTable.RoverEntry.COLUMN_ROVER_ID)));
+                rdo.setU_roverID(cursor.getString(cursor.getColumnIndex(RoverTable.RoverEntry.COLUMN_ROVER_ID)));
+                rdo.setRover_Name(cursor.getString(cursor.getColumnIndex(RoverTable.RoverEntry.COLUMN_ROVER_NAME)));
                 rResult.add(rdo);
             }
             cursor.close();

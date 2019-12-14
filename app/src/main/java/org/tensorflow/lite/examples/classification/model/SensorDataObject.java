@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 public class SensorDataObject {
 
     // match with service now column names
-    float u_light;
+    float u_ambient_light;
     float u_acc_x;
     float u_acc_y;
     float u_acc_z;
@@ -22,11 +22,11 @@ public class SensorDataObject {
 
 
     public float getLight() {
-        return u_light;
+        return u_ambient_light;
     }
 
     public void setLight(float light) {
-        this.u_light= light;
+        this.u_ambient_light = light;
     }
 
     public float getAccx() {
@@ -111,7 +111,7 @@ public class SensorDataObject {
     @NonNull
     @Override
     public String toString() {
-        return "Light:"+u_light
+        return "Light:"+ u_ambient_light
                 +", accX:"+u_acc_x
                 +", accY:"+u_acc_y
                 +", accZ:"+u_acc_z
