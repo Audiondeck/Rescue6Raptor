@@ -10,11 +10,11 @@ import java.io.Console;
 import java.nio.ByteBuffer;
 
 public class Swarm {
-
-    UartService uart = new UartService();
-    SensorDataObject sdoCompass = new SensorDataObject();
-    FieldActivity fieldActivity = new FieldActivity();
-    RoverParams rover = new RoverParams();
+    CameraFragment cameraFragment;
+    RoverParams rover;
+    FieldActivity fieldActivity;
+    SensorDataObject sdoCompass;
+    UartService uart;
 
     int stop = 0;
     int goForward = 1;
@@ -24,19 +24,33 @@ public class Swarm {
 
     float oppositeDepartureDirection;
     float departureDirection;
-    int blocksPerLane = fieldActivity.getBlocksPerLane();
-    int lanes = fieldActivity.getLanes();
-    int roverId = rover.getRoverId();
+    int blocksPerLane;
+    int lanes;
+    int roverId;
     int startingLane = roverId;
-    String generalRoverDirection = (rover.isEven() == 0)? "down": "up";
-    int startingBlock = (generalRoverDirection == "up")? 0: blocksPerLane;
-    CameraFragment cameraFragment = new CameraFragment();
+    String generalRoverDirection;
+    int startingBlock;
+
+    public Swarm(){
+        uart = new UartService();
+        sdoCompass = new SensorDataObject();
+        fieldActivity = new FieldActivity();
+        rover = new RoverParams();
+        cameraFragment = new CameraFragment();
+    }
 
     //Rovers 1 and 3 are going to start at the bottom of the first and third lanes
     //Rovers 2 and 4 are going to start at the top of the second and fourth lanes
     public void startSwarm() {
+        blocksPerLane = fieldActivity.getBlocksPerLane();
+        lanes = fieldActivity.getLanes();
+        roverId = rover.getRoverId();
+        generalRoverDirection = (rover.isEven() == 0)? "down": "up";
+        startingBlock = (generalRoverDirection == "up")? 0: blocksPerLane;
+
         departureDirection = sdoCompass.getU_compass();
         setOtherDirections();
+
 
         for (int i = startingLane; i < lanes; i += 4) {
             switch(generalRoverDirection){
@@ -116,7 +130,7 @@ public class Swarm {
         System.arraycopy(degreeBytes, 0, combinedBytes, orderByte.length, degreeBytes.length);
 
         uart.writeRXCharacteristic(combinedBytes);
-        System.out.println("Sending info for forward: " +combinedBytes);
+        System.out.println("Sending info for forward: " + combinedBytes);
     }
 
     //Called at the end of finding everything, if there are still lanes unsearched, the rover that

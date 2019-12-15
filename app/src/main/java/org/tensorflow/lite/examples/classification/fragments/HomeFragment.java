@@ -49,6 +49,8 @@ public class HomeFragment extends Fragment {
     private TextView relativeHumidityTV;
     private TextView latLngTV;
     TextView degreeTV;
+    static FieldActivity fieldActivity = new FieldActivity();
+    static Swarm swarm = new Swarm();
     private Button startMissionButton;
     private FusedLocationProviderClient fusedLocationProviderClient;
 
@@ -123,12 +125,7 @@ public class HomeFragment extends Fragment {
         startMissionButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                FieldActivity fieldActivity = new FieldActivity();
-                Swarm swarm = new Swarm();
                 mListener.onStartMissionButtonPressed();
-                fieldActivity.calculateFieldParams(mWidth, mLength);
-                fieldActivity.createGrid();
-                swarm.startSwarm();
             }
         });
 
@@ -170,6 +167,9 @@ public class HomeFragment extends Fragment {
 
     public void onStartMission(int minutes, float mLength, float mWidth, int duration, String roverTeam) {
         homeViewModel.onStartMission(minutes, mLength, mWidth, duration, roverTeam);
+        fieldActivity.calculateFieldParams(mWidth, mLength);
+        fieldActivity.createGrid();
+        swarm.startSwarm();
     }
 
     public interface OnFragmentInteractionListener {

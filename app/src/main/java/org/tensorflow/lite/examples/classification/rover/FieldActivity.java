@@ -4,20 +4,21 @@ public class FieldActivity {
     double blockWidth = 2.5;
     double blockLength = 5;
 
-    private int blocksPerLane;
-    private int lanes;
+    public static int blocksPerLane;
+    public static int lanes;
 
     static int notSearched = 0;
     static int searched = 1;
     static int found = 2;
 
-    public int[][] grid = new int[lanes][blocksPerLane];
+    public int[][] grid;
 
 
     //Sets blocksPerLane, lanes
     public void calculateFieldParams(double fieldWidth, double fieldLength) {
         lanes = (int) (fieldWidth / blockWidth);
         blocksPerLane = (int) (fieldLength / blockLength);
+        grid = new int[lanes][blocksPerLane];
     }
 
     //Creates the grid similar to battleship
