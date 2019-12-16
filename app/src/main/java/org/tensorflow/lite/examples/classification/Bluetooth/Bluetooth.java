@@ -7,6 +7,7 @@ import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
@@ -25,9 +26,11 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import org.tensorflow.lite.examples.classification.R;
+import org.tensorflow.lite.examples.classification.rover.Swarm;
 
 import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
@@ -45,13 +48,15 @@ public class Bluetooth extends Activity implements RadioGroup.OnCheckedChangeLis
     TextView mRemoteRssiVal;
     RadioGroup mRg;
     private int mState = UART_PROFILE_DISCONNECTED;
-    private UartService mService = null;
+    public UartService mService = null;
     private BluetoothDevice mDevice = null;
     private BluetoothAdapter mBtAdapter = null;
     private ListView messageListView;
     private ArrayAdapter<String> listAdapter;
     private Button btnConnectDisconnect, btnSend;
     private EditText edtMessage;
+
+    Swarm swarm = new Swarm();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -102,6 +107,7 @@ public class Bluetooth extends Activity implements RadioGroup.OnCheckedChangeLis
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                swarm.startSwarm();
                 EditText editText = (EditText) findViewById(R.id.sendText);
                 String message = editText.getText().toString();
                 byte[] value;
@@ -130,6 +136,7 @@ public class Bluetooth extends Activity implements RadioGroup.OnCheckedChangeLis
     private ServiceConnection mServiceConnection = new ServiceConnection() {
         public void onServiceConnected(ComponentName className, IBinder rawBinder) {
             mService = ((UartService.LocalBinder) rawBinder).getService();
+            swarm.setUartService(mService);
             Log.d(TAG, "onServiceConnected mService= " + mService);
             if (!mService.initialize()) {
                 Log.e(TAG, "Unable to initialize Bluetooth");
@@ -250,10 +257,10 @@ public class Bluetooth extends Activity implements RadioGroup.OnCheckedChangeLis
         super.onStart();
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Log.d(TAG, "onDestroy()");
+//    @Override
+//    public void onDestroy() {
+//        super.onDestroy();
+//        Log.d(TAG, "onDestroy()");
 //
 //        try {
 //        	LocalBroadcastManager.getInstance(this).unregisterReceiver(UARTStatusChangeReceiver);
@@ -264,7 +271,7 @@ public class Bluetooth extends Activity implements RadioGroup.OnCheckedChangeLis
 //        mService.stopSelf();
 //        mService= null;
 
-    }
+//    }
 
     @Override
     protected void onStop() {
@@ -346,30 +353,31 @@ public class Bluetooth extends Activity implements RadioGroup.OnCheckedChangeLis
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
 
     }
-}
+
 //    @Override
 //    public void onBackPressed() {
 //        if (mState == UART_PROFILE_CONNECTED) {
-//            Intent startMain = new Intent(Intent.ACTION_MAIN);
+//            Intent startMain = new Intent(Intent.);
 //            startMain.addCategory(Intent.CATEGORY_HOME);
 //            startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 //            startActivity(startMain);
 //            showMessage("nRFUART's running in background.\n             Disconnect to exit");
 //        }
 //        else {
-//            new AlertDialog.Builder(this)
-//            .setIcon(android.R.drawable.ic_dialog_alert)
-//            .setTitle(R.string.popup_title)
-//            .setMessage(R.string.popup_message)
-//            .setPositiveButton(R.string.popup_yes, new DialogInterface.OnClickListener()
-//                {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//   	                finish();
-//                }
-//            })
-//            .setNegativeButton(R.string.popup_no, null)
-//            .show();
+////            new AlertDialog.Builder(this)
+////            .setIcon(android.R.drawable.ic_dialog_alert)
+////            .setTitle(R.string.popup_title)
+////            .setMessage(R.string.popup_message)
+////            .setPositiveButton(R.string.popup_yes, new DialogInterface.OnClickListener()
+////                {
+////                    @Override
+////                    public void onClick(DialogInterface dialog, int which) {
+////   	                finish();
+////                }
+////            })
+////            .setNegativeButton(R.string.popup_no, null)
+////            .show();
+//            setContentView(R.layout.fragment_camera);
 //        }
 //    }
-//}
+}

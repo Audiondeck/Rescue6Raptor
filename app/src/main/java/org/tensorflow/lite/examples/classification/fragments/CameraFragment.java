@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import org.tensorflow.lite.examples.classification.R;
+import org.tensorflow.lite.examples.classification.rover.Swarm;
 import org.tensorflow.lite.examples.classification.tflite.Classifier.Recognition;
 
 /**
@@ -20,6 +21,7 @@ public class CameraFragment extends Fragment {
     TextView object;
     TextView confidence;
     public View foundView;
+    Swarm swarm = new Swarm();
 
     @Override
     public View onCreateView(
@@ -48,6 +50,7 @@ public class CameraFragment extends Fragment {
 
             if(recognition.getTitle().equals("soccer ball") && recognition.getConfidence() >= 0.55){
                 foundView.setVisibility(View.VISIBLE);
+                swarm.checkForCameraView(foundView);
                 //
             } else {
                 foundView.setVisibility(View.INVISIBLE);

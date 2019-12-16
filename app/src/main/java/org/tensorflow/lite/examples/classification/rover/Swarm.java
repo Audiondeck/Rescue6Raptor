@@ -3,24 +3,21 @@ package org.tensorflow.lite.examples.classification.rover;
 import android.view.View;
 
 import org.tensorflow.lite.examples.classification.Bluetooth.UartService;
-import org.tensorflow.lite.examples.classification.fragments.CameraFragment;
 import org.tensorflow.lite.examples.classification.model.SensorDataObject;
 
-import java.io.Console;
-import java.nio.ByteBuffer;
+import java.io.UnsupportedEncodingException;
 
-public class Swarm {
-    CameraFragment cameraFragment;
+public class Swarm{
+    View cameraFoundView = null;
     RoverParams rover;
     FieldActivity fieldActivity;
-    SensorDataObject sdoCompass;
+    SensorDataObject sensorDataObject;
     UartService uart;
 
-    int stop = 0;
-    int goForward = 1;
-    int goAroundVictim =2;
-    int rightUTurn = 3;
-    int leftUTurn = 4;
+    String stop = "0";
+    String goForward = "1";
+    String rightUTurn = "2";
+    String leftUTurn = "3";
 
     float oppositeDepartureDirection;
     float departureDirection;
@@ -31,37 +28,46 @@ public class Swarm {
     String generalRoverDirection;
     int startingBlock;
 
+//UartService extUart, SensorDataObject extSensorDataObject
     public Swarm(){
-        uart = new UartService();
-        sdoCompass = new SensorDataObject();
+        sensorDataObject = new SensorDataObject();
         fieldActivity = new FieldActivity();
         rover = new RoverParams();
-        cameraFragment = new CameraFragment();
+    }
+
+    public void setUartService(UartService extUart){
+        uart = extUart;
+    }
+
+    public void checkForCameraView(View extCamFoundView){
+        cameraFoundView = extCamFoundView;
+    }
+
+    public void setSensorDataObject(SensorDataObject exSensor){
+        sensorDataObject = exSensor;
     }
 
     //Rovers 1 and 3 are going to start at the bottom of the first and third lanes
     //Rovers 2 and 4 are going to start at the top of the second and fourth lanes
-    public void startSwarm() {
+    public void startSwarm(){
         blocksPerLane = fieldActivity.getBlocksPerLane();
         lanes = fieldActivity.getLanes();
         roverId = rover.getRoverId();
-        generalRoverDirection = (rover.isEven() == 0)? "down": "up";
+        generalRoverDirection = (rover.isEven() == 0)?  "down" : "up";
         startingBlock = (generalRoverDirection == "up")? 0: blocksPerLane;
-
-        departureDirection = sdoCompass.getU_compass();
+        departureDirection = sensorDataObject.getU_compass();
         setOtherDirections();
-
 
         for (int i = startingLane; i < lanes; i += 4) {
             switch(generalRoverDirection){
                 case "down":
-                    for (int j = startingBlock - 1; j >= 0; j--) {
-                        runSwarmLogic(i, j);
+                    for (int j = blocksPerLane; j >= 1; j--) {
+                        runSwarmLogicDown(i, j);
                     }
                     break;
                 case "up":
                     for (int j = startingBlock; j < blocksPerLane; j++) {
-                        runSwarmLogic(i, j);
+                        runSwarmLogicUp(i, j);
                     }
                     break;
             }
@@ -77,80 +83,134 @@ public class Swarm {
     }
 
     //Called for each block in one lane
-    void runSwarmLogic(int currentLane, int currentBlock){
+    void runSwarmLogicDown(int currentLane, int currentBlock){
         //Goes forward and marks each block in the grid if it's not the last block
-        if (currentBlock != blocksPerLane - 1 || currentBlock != 1) {
-            goForward();
-            if (cameraFragment.foundView.getVisibility() != View.VISIBLE)
-                fieldActivity.searchedBlock(currentLane, currentBlock);
-            else
-                fieldActivity.foundInBlock(currentLane, currentBlock);
-                stop();
-        }
-        //Logic for making the proper U-turn to get into their next designated lane
-        else {
-            if (cameraFragment.foundView.getVisibility() != View.VISIBLE) {
-                fieldActivity.searchedBlock(currentLane, currentBlock);
-                switch (generalRoverDirection) {
-                    case "down":
-                        leftUturn();
-                        generalRoverDirection = "up";
-                        break;
-                    case "up":
-                        rightUturn();
-                        generalRoverDirection = "down";
-                        break;
+            if (currentBlock != 1) {
+                goForward();
+                if (cameraFoundView != null)
+                    stop();
+            }
+            else if(currentLane != lanes){
+                if (cameraFoundView == null) {
+                    switch (generalRoverDirection) {
+                        case "down":
+                            leftUturn();
+                            generalRoverDirection = "up";
+                            break;
+                        case "up":
+                            rightUturn();
+                            generalRoverDirection = "down";
+                            break;
+                    }
                 }
+                else
+                    stop();
             }
             else
-                fieldActivity.foundInBlock(currentLane, currentBlock);
                 stop();
+        //Logic for making the proper U-turn to get into their next designated lane
+        try {
+            Thread.sleep(6000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
+    void runSwarmLogicUp(int currentLane, int currentBlock) {
+        //Goes forward and marks each block in the grid if it's not the last block
+            if (currentBlock != (blocksPerLane - 1)) {
+                goForward();
+                if (cameraFoundView != null)
+                    stop();
+            } else if(currentLane != lanes){
+                if (cameraFoundView == null) {
+                    switch (generalRoverDirection) {
+                        case "down":
+                            leftUturn();
+                            generalRoverDirection = "up";
+                            break;
+                        case "up":
+                            rightUturn();
+                            generalRoverDirection = "down";
+                            break;
+                    }
+                } else
+                    stop();
+            }
+            else
+                stop();
+        try {
+            Thread.sleep(6000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     void rightUturn(){
-        byte [] bytes = ByteBuffer.allocate(4).putInt(rightUTurn).array();
-        uart.writeRXCharacteristic(bytes);
+        byte[] value;
+        try {
+            value = rightUTurn.getBytes("UTF-8");
+            uart.writeRXCharacteristic(value);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
     }
 
     void leftUturn(){
-        byte [] bytes = ByteBuffer.allocate(4).putInt(leftUTurn).array();
-        uart.writeRXCharacteristic(bytes);
+        byte[] value;
+        try {
+            value = leftUTurn.getBytes("UTF-8");
+            uart.writeRXCharacteristic(value);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
     }
 
     //Adjusts wheel direction to stay straight and moves the rover forward one block
     void goForward(){
         float degreeAdjustment = adjustWheelAlignment();
 
-        byte [] orderByte = ByteBuffer.allocate(4).putInt(goForward).array();
-        byte [] degreeBytes = ByteBuffer.allocate(4).putFloat(degreeAdjustment).array();
-        byte[] combinedBytes = new byte[orderByte.length + degreeBytes.length];
+        byte[] value;
+        try {
+            value = goForward.getBytes("UTF-8");
+            uart.writeRXCharacteristic(value);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
-        System.arraycopy(orderByte, 0, combinedBytes, 0, orderByte.length);
-        System.arraycopy(degreeBytes, 0, combinedBytes, orderByte.length, degreeBytes.length);
+//        byte [] orderByte = ByteBuffer.allocate(4).putInt(goForward).array();
+//        byte [] degreeBytes = ByteBuffer.allocate(4).putFloat(degreeAdjustment).array();
+//        byte[] combinedBytes = new byte[orderByte.length + degreeBytes.length];
+//
+//        System.arraycopy(orderByte, 0, combinedBytes, 0, orderByte.length);
+//        System.arraycopy(degreeBytes, 0, combinedBytes, orderByte.length, degreeBytes.length);
 
-        uart.writeRXCharacteristic(combinedBytes);
-        System.out.println("Sending info for forward: " + combinedBytes);
+        System.out.println("Sending info for forward: ");
     }
 
     //Called at the end of finding everything, if there are still lanes unsearched, the rover that
     //is assigned those lanes will go around the ball and continue searching
-    void goAroundVictim(){
-        byte [] bytes = ByteBuffer.allocate(4).putInt(goAroundVictim).array();
-        uart.writeRXCharacteristic(bytes);
-    }
+//    void goAroundVictim(){
+//        byte [] bytes = ByteBuffer.allocate(4).putInt(goAroundVictim).array();
+//        uart.writeRXCharacteristic(bytes);
+//    }
 
     //Called when something is found and just stops the rover
     void stop(){
-        byte [] bytes = ByteBuffer.allocate(4).putInt(stop).array();
-        uart.writeRXCharacteristic(bytes);
-
+        byte[] value;
+        try {
+            value = stop.getBytes("UTF-8");
+            uart.writeRXCharacteristic(value);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
     }
 
     //Turns wheels in proper direction and angle to realign arduino
     //back into original orientation while continuing forward
     float adjustWheelAlignment(){
-        float currentDirection = sdoCompass.getU_compass();
+        float currentDirection = sensorDataObject.getU_compass();
 
         //Calculate degree necessary
         return getAdjustedDegreeForSending(currentDirection);

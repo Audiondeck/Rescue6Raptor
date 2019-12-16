@@ -169,7 +169,6 @@ public class HomeFragment extends Fragment {
         homeViewModel.onStartMission(minutes, mLength, mWidth, duration, roverTeam);
         fieldActivity.calculateFieldParams(mWidth, mLength);
         fieldActivity.createGrid();
-        swarm.startSwarm();
     }
 
     public interface OnFragmentInteractionListener {

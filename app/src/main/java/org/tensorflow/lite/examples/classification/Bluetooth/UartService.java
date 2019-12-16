@@ -48,6 +48,7 @@ import java.util.UUID;
  * given Bluetooth LE device.
  */
 public class UartService extends Service {
+
     private final static String TAG = UartService.class.getSimpleName();
 
     private BluetoothManager mBluetoothManager;
