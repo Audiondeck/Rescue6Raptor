@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import org.tensorflow.lite.examples.classification.Bluetooth.Bluetooth;
 import org.tensorflow.lite.examples.classification.R;
 import org.tensorflow.lite.examples.classification.rover.Swarm;
 import org.tensorflow.lite.examples.classification.tflite.Classifier.Recognition;
@@ -21,7 +22,7 @@ public class CameraFragment extends Fragment {
     TextView object;
     TextView confidence;
     public View foundView;
-    Swarm swarm = new Swarm();
+    Swarm swarm = Bluetooth.getSwarmInstance();
 
     @Override
     public View onCreateView(

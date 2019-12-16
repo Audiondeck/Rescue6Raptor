@@ -26,9 +26,11 @@ public class RoverParams {
     }
 
     public void setRoverId(String roverId) {
-        this.roverId = Integer.parseInt(roverId.replaceAll("\\D+",""));
+        this.roverId = Integer.parseInt(roverId.replaceAll("[^\\d]", ""));
     }
 
     //If even, returns 0, else returns 1.
-    public static int isEven() {return (roverId % 2 == 0)? 0:1;}
+    public static int isEven() {
+        return (roverId % 2 == 0)? 0:1;
+    }
 }

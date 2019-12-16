@@ -13,7 +13,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import org.tensorflow.lite.examples.classification.Bluetooth.Bluetooth;
 import org.tensorflow.lite.examples.classification.R;
+import org.tensorflow.lite.examples.classification.rover.AsyncSwarm;
 import org.tensorflow.lite.examples.classification.rover.FieldActivity;
 import org.tensorflow.lite.examples.classification.rover.Swarm;
 
@@ -21,9 +23,8 @@ public class NewMissionDialogFragment extends DialogFragment implements View.OnC
 
     private OnFragmentInteractionListener mListener;
     private NewMissionViewModel mViewModel;
-    FieldActivity fieldActivity = new FieldActivity();
-    Swarm swarm = new Swarm();
-
+//    FieldActivity fieldActivity = new FieldActivity();
+    static Swarm swarm = Bluetooth.getSwarmInstance();
     private EditText durationTV;
     private int duration;
     private String roverTeam;
@@ -109,6 +110,14 @@ public class NewMissionDialogFragment extends DialogFragment implements View.OnC
         mViewModel.setmDuration(duration);
         if (mListener != null) {
             mListener.onStartMission(mViewModel.getmDuration(), mLength, mWidth, duration, roverTeam);
+            Thread t = new Thread(new Runnable() {
+                public void run() {
+                    swarm.startSwarm();
+//                    new AsyncSwarm(swarm).execute();
+                }
+            });
+
+            t.start();
         }
 
         dismiss();

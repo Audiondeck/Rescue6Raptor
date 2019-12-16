@@ -56,7 +56,12 @@ public class Bluetooth extends Activity implements RadioGroup.OnCheckedChangeLis
     private Button btnConnectDisconnect, btnSend;
     private EditText edtMessage;
 
-    Swarm swarm = new Swarm();
+    private static final Swarm swarm = new Swarm();
+
+    public static Swarm getSwarmInstance() {
+        return swarm;
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -107,7 +112,7 @@ public class Bluetooth extends Activity implements RadioGroup.OnCheckedChangeLis
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                swarm.startSwarm();
+//                swarm.startSwarm();
                 EditText editText = (EditText) findViewById(R.id.sendText);
                 String message = editText.getText().toString();
                 byte[] value;
@@ -273,17 +278,17 @@ public class Bluetooth extends Activity implements RadioGroup.OnCheckedChangeLis
 
 //    }
 
-    @Override
-    protected void onStop() {
-        Log.d(TAG, "onStop");
-        super.onStop();
-    }
+//    @Override
+//    protected void onStop() {
+//        Log.d(TAG, "onStop");
+//        super.onStop();
+//    }
 
-    @Override
-    protected void onPause() {
-        Log.d(TAG, "onPause");
-        super.onPause();
-    }
+//    @Override
+//    protected void onPause() {
+//        Log.d(TAG, "onPause");
+//        super.onPause();
+//    }
 
     @Override
     protected void onRestart() {

@@ -1,5 +1,6 @@
 package org.tensorflow.lite.examples.classification.rover;
 
+import android.app.Activity;
 import android.view.View;
 
 import org.tensorflow.lite.examples.classification.Bluetooth.UartService;
@@ -27,6 +28,9 @@ public class Swarm{
     int startingLane = roverId;
     String generalRoverDirection;
     int startingBlock;
+    boolean found = false;
+
+
 
 //UartService extUart, SensorDataObject extSensorDataObject
     public Swarm(){
@@ -50,6 +54,11 @@ public class Swarm{
     //Rovers 1 and 3 are going to start at the bottom of the first and third lanes
     //Rovers 2 and 4 are going to start at the top of the second and fourth lanes
     public void startSwarm(){
+        try {
+            Thread.sleep(7000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         blocksPerLane = fieldActivity.getBlocksPerLane();
         lanes = fieldActivity.getLanes();
         roverId = rover.getRoverId();
@@ -57,17 +66,24 @@ public class Swarm{
         startingBlock = (generalRoverDirection == "up")? 0: blocksPerLane;
         departureDirection = sensorDataObject.getU_compass();
         setOtherDirections();
+        goForward();
 
         for (int i = startingLane; i < lanes; i += 4) {
             switch(generalRoverDirection){
                 case "down":
                     for (int j = blocksPerLane; j >= 1; j--) {
-                        runSwarmLogicDown(i, j);
+                        if(!found)
+                            runSwarmLogicDown(i, j);
+                        else
+                            break;
                     }
                     break;
                 case "up":
                     for (int j = startingBlock; j < blocksPerLane; j++) {
-                        runSwarmLogicUp(i, j);
+                        if(!found)
+                            runSwarmLogicUp(i, j);
+                        else
+                            break;
                     }
                     break;
             }
@@ -96,10 +112,12 @@ public class Swarm{
                         case "down":
                             leftUturn();
                             generalRoverDirection = "up";
+                            updateStartingBlock(generalRoverDirection);
                             break;
                         case "up":
                             rightUturn();
                             generalRoverDirection = "down";
+                            updateStartingBlock(generalRoverDirection);
                             break;
                     }
                 }
@@ -128,10 +146,12 @@ public class Swarm{
                         case "down":
                             leftUturn();
                             generalRoverDirection = "up";
+                            updateStartingBlock(generalRoverDirection);
                             break;
                         case "up":
                             rightUturn();
                             generalRoverDirection = "down";
+                            updateStartingBlock(generalRoverDirection);
                             break;
                     }
                 } else
@@ -205,6 +225,7 @@ public class Swarm{
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+        found = true;
     }
 
     //Turns wheels in proper direction and angle to realign arduino
@@ -235,4 +256,10 @@ public class Swarm{
         oppositeDepartureDirection = (sum > 360)? sum - 360 : sum;
     }
 
+    public void updateStartingBlock(String direction){
+        if(direction == "up")
+            startingBlock = 0;
+        if(direction == "down")
+            startingBlock = blocksPerLane;
+    }
 }

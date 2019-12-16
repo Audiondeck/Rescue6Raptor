@@ -83,7 +83,7 @@ public class AsyncRover extends AsyncTask<Void, Void, String> {
             con2.disconnect();
 
             i_team = roverDataObject.getRover_Name();
-            rover.setRoverId(roverDataObject.getRover_Name());
+            rover.setRoverId(roverDataObject.getU_roverID());
 
 
             //covert response to string

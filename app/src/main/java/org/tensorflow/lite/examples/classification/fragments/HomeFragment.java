@@ -32,7 +32,6 @@ import com.google.android.gms.tasks.Task;
 import org.tensorflow.lite.examples.classification.R;
 import org.tensorflow.lite.examples.classification.model.SensorDataObject;
 import org.tensorflow.lite.examples.classification.rover.FieldActivity;
-import org.tensorflow.lite.examples.classification.rover.Swarm;
 import org.tensorflow.lite.examples.classification.tflite.Classifier;
 
 
@@ -50,7 +49,6 @@ public class HomeFragment extends Fragment {
     private TextView latLngTV;
     TextView degreeTV;
     static FieldActivity fieldActivity = new FieldActivity();
-    static Swarm swarm = new Swarm();
     private Button startMissionButton;
     private FusedLocationProviderClient fusedLocationProviderClient;
 
