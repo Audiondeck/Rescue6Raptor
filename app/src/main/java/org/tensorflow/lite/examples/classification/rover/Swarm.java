@@ -25,7 +25,8 @@ public class Swarm{
     int blocksPerLane;
     int lanes;
     int roverId;
-    int startingLane = roverId;
+    int startingLane;
+    int lastLane;
     String generalRoverDirection;
     int startingBlock;
     boolean found = false;
@@ -47,10 +48,6 @@ public class Swarm{
         cameraFoundView = extCamFoundView;
     }
 
-    public void setSensorDataObject(SensorDataObject exSensor){
-        sensorDataObject = exSensor;
-    }
-
     //Rovers 1 and 3 are going to start at the bottom of the first and third lanes
     //Rovers 2 and 4 are going to start at the top of the second and fourth lanes
     public void startSwarm(){
@@ -62,6 +59,7 @@ public class Swarm{
         blocksPerLane = fieldActivity.getBlocksPerLane();
         lanes = fieldActivity.getLanes();
         roverId = rover.getRoverId();
+        startingLane = roverId;
         generalRoverDirection = (rover.isEven() == 0)?  "down" : "up";
         startingBlock = (generalRoverDirection == "up")? 0: blocksPerLane;
         departureDirection = sensorDataObject.getU_compass();
@@ -71,7 +69,7 @@ public class Swarm{
         for (int i = startingLane; i < lanes; i += 4) {
             switch(generalRoverDirection){
                 case "down":
-                    for (int j = blocksPerLane; j >= 1; j--) {
+                    for (int j = blocksPerLane; j > 1; j--) {
                         if(!found)
                             runSwarmLogicDown(i, j);
                         else
@@ -101,7 +99,7 @@ public class Swarm{
     //Called for each block in one lane
     void runSwarmLogicDown(int currentLane, int currentBlock){
         //Goes forward and marks each block in the grid if it's not the last block
-            if (currentBlock != 1) {
+            if (currentBlock != 2) {
                 goForward();
                 if (cameraFoundView != null)
                     stop();

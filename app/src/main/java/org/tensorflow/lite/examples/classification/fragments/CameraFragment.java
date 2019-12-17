@@ -49,7 +49,7 @@ public class CameraFragment extends Fragment {
                 return;
             }
 
-            if(recognition.getTitle().equals("soccer ball") && recognition.getConfidence() >= 0.55){
+            if(recognition.getTitle().equals("soccer ball") && recognition.getConfidence() >= 0.80){
                 foundView.setVisibility(View.VISIBLE);
                 swarm.checkForCameraView(foundView);
                 //
